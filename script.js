@@ -76,3 +76,50 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById('introSubtitle').classList.add('visible');
   }, 2000); // 2s delay než se p element objeví
 });
+
+
+
+
+// Jednoduchý „typing / rotating text“ efekt
+const rotatingEls = document.querySelectorAll('.rotating');
+rotatingEls.forEach(el => {
+  const words = JSON.parse(el.getAttribute('data-words'));
+  let idx = 0, charIdx = 0, deleting = false;
+  function tick() {
+    const word = words[idx];
+    el.textContent = word.substring(0, charIdx);
+    if (!deleting) {
+      if (charIdx < word.length) {
+        charIdx++;
+        setTimeout(tick, 100);
+      } else {
+        deleting = true;
+        setTimeout(tick, 1500);
+      }
+    } else {
+      if (charIdx > 0) {
+        charIdx--;
+        setTimeout(tick, 50);
+      } else {
+        deleting = false;
+        idx = (idx + 1) % words.length;
+        setTimeout(tick, 500);
+      }
+    }
+  }
+  tick();
+});
+
+// Jednoduchý scroll-reveal
+const revealDemos = document.querySelectorAll('.reveal-demo');
+function revealOnScroll() {
+  revealDemos.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.85) {
+      el.style.opacity = 1;
+      el.style.transform = 'translateY(0)';
+    }
+  });
+}
+window.addEventListener('scroll', revealOnScroll);
+window.onload = revealOnScroll;
