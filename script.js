@@ -38,7 +38,7 @@ function updateTheme(){
 
 
 // ROTUJÍCÍ TEXT
-const words = ["weby", "aplikace", "digitální produkty"];
+const words = ["weby", "aplikace", "SQL databáze"];
 let currentWord = 0;
 let currentChar = 0;
 let isDeleting = false;
