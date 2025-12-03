@@ -359,3 +359,40 @@ body.dark {
     align-items: center;
   }
 }
+
+
+
+
+/* ARCHITEKTONICKÁ MŘÍŽKA S FADE */
+.arch-grid-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  /* Jemná mřížka */
+  background-image:
+    linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+
+  background-size: 40px 40px; /* velikost čtverců */
+  opacity: 0.28; /* jemnost mřížky */
+
+  /* fade efekt okolo okrajů */
+  mask-image: radial-gradient(
+    circle at center,
+    black 45%,
+    transparent 100%
+  );
+}
+
+/* Barvy mřížky pro světlo/tmu */
+:root {
+  --grid-color: rgba(0, 0, 0, 0.15); /* light režim */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --grid-color: rgba(255, 255, 255, 0.12); /* dark režim */
+  }
+}
