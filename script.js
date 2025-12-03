@@ -35,3 +35,37 @@ function updateTheme(){
 
   hamburger.querySelectorAll('span').forEach(span=>span.style.background=isDark?'#fff':'#111');
 }
+
+
+// Rotující text
+const words = ["weby", "aplikace", "digitální produkty"];
+let currentWord = 0;
+let currentChar = 0;
+let isDeleting = false;
+const element = document.getElementById("rotatingText");
+const typingSpeed = 100;
+const deletingSpeed = 50;
+const delayBetweenWords = 1500;
+
+function type() {
+  const word = words[currentWord];
+  if (!isDeleting) {
+    element.textContent = word.substring(0, currentChar + 1);
+    currentChar++;
+    if (currentChar === word.length) {
+      isDeleting = true;
+      setTimeout(type, delayBetweenWords);
+      return;
+    }
+  } else {
+    element.textContent = word.substring(0, currentChar - 1);
+    currentChar--;
+    if (currentChar === 0) {
+      isDeleting = false;
+      currentWord = (currentWord + 1) % words.length;
+    }
+  }
+  setTimeout(type, isDeleting ? deletingSpeed : typingSpeed);
+}
+
+type();
