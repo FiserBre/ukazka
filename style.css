@@ -371,8 +371,8 @@ body.dark {
   pointer-events: none;
 
   background-image:
-    linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+    linear-gradient(to right, var(--grid-color) 1px, transparent 2px),
+    linear-gradient(to bottom, var(--grid-color) 1px, transparent 2px);
 
   background-size: 40px 40px;
   opacity: var(--grid-opacity);
