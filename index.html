@@ -17,6 +17,7 @@
     nav a:hover { opacity: 0.6; }
     .hamburger { display: none; cursor: pointer; width: 30px; height: 22px; flex-direction: column; justify-content: space-between; }
     .hamburger span { height: 4px; background: #111; border-radius: 2px; transition: .3s; }
+    .dark-mode .hamburger span { background: #fff; }
     @media (max-width: 768px) { nav { display: none; } .hamburger { display: flex; } nav.open { display: flex; flex-direction: column; background: rgba(255,255,255,0.9); position: absolute; top: 70px; right: 20px; padding: 20px; border-radius: 16px; } nav.open a { margin: 10px 0; }}
 
     /* Layout */
@@ -48,16 +49,13 @@
   <div class="navbar-wrapper">
     <div class="navbar">
       <div class="logo">Portfolio</div>
-      <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-xl bg-white/10 dark:bg-black/20 border-b border-white/10 dark:border-white/5 transition-colors"> id="navLinks">
+      <nav id="navLinks">
         <a href="#intro">Úvod</a>
         <a href="#about">O mně</a>
         <a href="#skills">Dovednosti</a>
         <a href="#projects">Projekty</a>
         <a href="#contact">Kontakt</a>
-          <button onClick={toggleTheme} className="ml-4 p-2 rounded-xl bg-white/10 dark:bg-black/40">
-      {theme === "light" ? "🌙" : "☀️"}
-    </button>
-  </nav>
+      </nav>
       <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
       <button id="themeToggle" style="margin-left:20px; padding:8px 14px; border-radius:12px; border:1px solid rgba(0,0,0,0.2); background:white; cursor:pointer;">🌙</button>
     </div>
