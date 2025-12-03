@@ -37,7 +37,7 @@ function updateTheme(){
 }
 
 
-// Rotující text
+// ROTUJÍCÍ TEXT
 const words = ["weby", "aplikace", "digitální produkty"];
 let currentWord = 0;
 let currentChar = 0;
@@ -69,3 +69,10 @@ function type() {
 }
 
 type();
+
+// FADE-IN P ELEMENT PO CHVÍLI
+window.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    document.getElementById('introSubtitle').classList.add('visible');
+  }, 2000); // 2s delay než se p element objeví
+});
