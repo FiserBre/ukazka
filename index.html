@@ -6,6 +6,7 @@
   <title>Portfolio</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body { font-family: Arial, sans-serif; background: #f5f5f7; color: #111; }
 
     /* Floating Apple-style Navbar */
@@ -34,6 +35,11 @@
 
     /* Contact box */
     .contact-box { background: white; padding: 40px; border-radius: 20px; max-width: 600px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+      /* Dark mode */
+    body.dark { background:#111; color:#f5f5f7; }
+    body.dark .navbar { background:rgba(0,0,0,0.4); border-color:rgba(255,255,255,0.2); }
+    body.dark nav a { color:#f5f5f7; }
+    body.dark .card, body.dark .contact-box { background:#1c1c1c; box-shadow:0 10px 30px rgba(255,255,255,0.05); }
   </style>
 </head>
 <body>
@@ -41,15 +47,19 @@
   <!-- NAVBAR -->
   <div class="navbar-wrapper">
     <div class="navbar">
-      <div class="logo">Břetislav Fišer</div>
-      <nav id="navLinks">
+      <div class="logo">Portfolio</div>
+      <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-xl bg-white/10 dark:bg-black/20 border-b border-white/10 dark:border-white/5 transition-colors"> id="navLinks">
         <a href="#intro">Úvod</a>
         <a href="#about">O mně</a>
         <a href="#skills">Dovednosti</a>
         <a href="#projects">Projekty</a>
         <a href="#contact">Kontakt</a>
-      </nav>
+          <button onClick={toggleTheme} className="ml-4 p-2 rounded-xl bg-white/10 dark:bg-black/40">
+      {theme === "light" ? "🌙" : "☀️"}
+    </button>
+  </nav>
       <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+      <button id="themeToggle" style="margin-left:20px; padding:8px 14px; border-radius:12px; border:1px solid rgba(0,0,0,0.2); background:white; cursor:pointer;">🌙</button>
     </div>
   </div>
 
@@ -115,6 +125,19 @@
     const revealOnScroll = () => { reveals.forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight * 0.8) el.classList.add('visible'); }); };
     window.addEventListener('scroll', revealOnScroll);
     window.onload = revealOnScroll;
+
+    /* THEME TOGGLE */
+    const themeBtn = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) document.body.classList.toggle('dark', savedTheme === 'dark');
+    themeBtn.innerText = document.body.classList.contains('dark') ? '☀️' : '🌙';
+
+    themeBtn.onclick = () => {
+      document.body.classList.toggle('dark');
+      const isDark = document.body.classList.contains('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      themeBtn.innerText = isDark ? '☀️' : '🌙';
+    };
   </script>
 </body>
 </html>
