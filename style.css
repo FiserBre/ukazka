@@ -267,3 +267,95 @@ body.dark {
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
+
+
+/* ----- FOOTER ----- */
+
+.footer {
+  padding: 4rem 2rem;
+  background: var(--bg);
+  border-top: 1px solid rgba(255,255,255,0.1);
+  margin-top: 4rem;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+/* Gradient logo */
+.footer-logo {
+  font-size: 1.8rem;
+  font-weight: 900;
+  background: linear-gradient(90deg, #ff6ec4, #7873f5, var(--grad-3));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.footer-desc {
+  margin-top: .5rem;
+  max-width: 300px;
+  opacity: .8;
+}
+
+/* Links */
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.footer-links a {
+  text-decoration: none;
+  font-size: 1rem;
+  opacity: .8;
+  transition: .25s;
+}
+
+.footer-links a:hover {
+  opacity: 1;
+  transform: translateX(4px);
+}
+
+/* Socials */
+.footer-socials {
+  display: flex;
+  gap: 1rem;
+  font-size: 1.5rem;
+}
+
+.footer-socials a {
+  opacity: .8;
+  transition: .25s;
+}
+
+.footer-socials a:hover {
+  opacity: 1;
+  transform: translateY(-3px);
+}
+
+/* Bottom line */
+.footer-bottom {
+  margin-top: 3rem;
+  text-align: center;
+  opacity: .6;
+  font-size: .9rem;
+}
+
+/* Responsivita */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-links,
+  .footer-socials {
+    align-items: center;
+  }
+}
