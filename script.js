@@ -35,23 +35,3 @@ function updateTheme(){
 
   hamburger.querySelectorAll('span').forEach(span=>span.style.background=isDark?'#fff':'#111');
 }
-
-// Interaktivní pozadí
-for(let i=0;i<30;i++){
-  const dot = document.createElement('div');
-  dot.className='bg-dot';
-  dot.style.top=`${Math.random()*100}%`;
-  dot.style.left=`${Math.random()*100}%`;
-  dot.style.width=`${5 + Math.random()*15}px`;
-  dot.style.height=dot.style.width;
-  dot.style.animationDuration=`${4 + Math.random()*6}s`;
-  document.body.appendChild(dot);
-}
-
-document.body.addEventListener('mousemove', e => {
-  document.querySelectorAll('.bg-dot').forEach(dot=>{
-    const dx = (e.clientX - window.innerWidth/2)/50;
-    const dy = (e.clientY - window.innerHeight/2)/50;
-    dot.style.transform = `translate(${dx}px, ${dy}px)`;
-  });
-});
