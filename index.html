@@ -140,19 +140,19 @@
     };
 
     function updateTheme() {
-  const isDark = document.body.classList.contains('dark');
-  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      const isDark = document.body.classList.contains('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
 
-  // Změna ikony SVG
-  themeIcon.innerHTML = isDark
-    // Měsíc
-    ? `<path d="M12 18a6 6 0 100-12 6 6 0 000 12zm0-14a1 1 0 011 1v2a1 1 0 11-2 0V5a1 1 0 011-1zm0 14a1 1 0 011 1v2a1 1 0 11-2 0v-2a1 1 0 011-1zm9-7a1 1 0 110 2h-2a1 1 0 110-2h2zm-14 0a1 1 0 110 2H5a1 1 0 110-2h2zm10.07-7.07a1 1 0 011.41 1.41l-1.42 1.42a1 1 0 11-1.41-1.41l1.42-1.42zm-10.14 10.14a1 1 0 011.41 1.41l-1.42 1.42a1 1 0 11-1.41-1.41l1.42-1.42zm10.14 1.42a1 1 0 10-1.41 1.41l1.42 1.42a1 1 0 101.41-1.41l-1.42-1.42zm-10.14-10.14a1 1 0 10-1.41 1.41L5.93 8.93a1 1 0 101.41-1.41l-1.42-1.42z"/>`
-    // Slunce
-    : `<path d="M12 2V4M12 20V22M4 12H2M6.31412 6.31412L4.8999 4.8999M17.6859 6.31412L19.1001 4.8999M6.31412 17.69L4.8999 19.1042M17.6859 17.69L19.1001 19.1042M22 12H20M17 12C17 14.7614 14.7614 17 12 17C9.23858 17 7 14.7614 7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12Z"/>`;
+      // Ikona SVG
+      themeIcon.innerHTML = isDark
+        // Měsíc
+        ? `<path d="M12 18a6 6 0 100-12 6 6 0 000 12zm0-14a1 1 0 011 1v2a1 1 0 11-2 0V5a1 1 0 011-1zm0 14a1 1 0 011 1v2a1 1 0 11-2 0v-2a1 1 0 011-1zm9-7a1 1 0 110 2h-2a1 1 0 110-2h2zm-14 0a1 1 0 110 2H5a1 1 0 110-2h2zm10.07-7.07a1 1 0 011.41 1.41l-1.42 1.42a1 1 0 11-1.41-1.41l1.42-1.42zm-10.14 10.14a1 1 0 011.41 1.41l-1.42 1.42a1 1 0 11-1.41-1.41l1.42-1.42zm10.14 1.42a1 1 0 10-1.41 1.41l1.42 1.42a1 1 0 101.41-1.41l-1.42-1.42zm-10.14-10.14a1 1 0 10-1.41 1.41L5.93 8.93a1 1 0 101.41-1.41l-1.42-1.42z"/>`
+        // Slunce (nové)
+        : `<path d="M12 2V4M12 20V22M4 12H2M6.31412 6.31412L4.8999 4.8999M17.6859 6.31412L19.1001 4.8999M6.31412 17.69L4.8999 19.1042M17.6859 17.69L19.1001 19.1042M22 12H20M17 12C17 14.7614 14.7614 17 12 17C9.23858 17 7 14.7614 7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12Z"/>`;
 
-  // Hamburger barva
-  hamburger.querySelectorAll('span').forEach(span => span.style.background = isDark ? '#fff' : '#111');
-}
+      // Hamburger barva
+      hamburger.querySelectorAll('span').forEach(span => span.style.background = isDark ? '#fff' : '#111');
+    }
   </script>
 </body>
 </html>
