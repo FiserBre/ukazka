@@ -17,7 +17,6 @@
     nav a:hover { opacity: 0.6; }
     .hamburger { display: none; cursor: pointer; width: 30px; height: 22px; flex-direction: column; justify-content: space-between; }
     .hamburger span { height: 4px; background: #111; border-radius: 2px; transition: .3s; }
-    .dark-mode .hamburger span { background: #fff; }
     @media (max-width: 768px) { nav { display: none; } .hamburger { display: flex; } nav.open { display: flex; flex-direction: column; background: rgba(255,255,255,0.9); position: absolute; top: 70px; right: 20px; padding: 20px; border-radius: 16px; } nav.open a { margin: 10px 0; }}
 
     /* Layout */
@@ -36,7 +35,8 @@
 
     /* Contact box */
     .contact-box { background: white; padding: 40px; border-radius: 20px; max-width: 600px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-      /* Dark mode */
+
+    /* Dark mode */
     body.dark { background:#111; color:#f5f5f7; }
     body.dark .navbar { background:rgba(0,0,0,0.4); border-color:rgba(255,255,255,0.2); }
     body.dark nav a { color:#f5f5f7; }
@@ -57,19 +57,22 @@
         <a href="#contact">Kontakt</a>
       </nav>
       <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
-      <button id="themeToggle" style="margin-left:20px; padding:8px 14px; border-radius:12px; border:1px solid rgba(0,0,0,0.2); background:white; cursor:pointer;">🌙</button>
+      <div id="themeToggle" style="margin-left:20px; cursor:pointer; display:flex; align-items:center;">
+        <svg id="themeIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/>
+        </svg>
+      </div>
     </div>
   </div>
 
   <!-- INTRO / HERO -->
-  <section id="intro" class="flex flex-col md:flex-row items-center gap-8">
-  <div class="md:w-1/2">
-    <h1 class="reveal" style="font-size: 64px; max-width: 700px;">Tvořím moderní weby, aplikace a digitální produkty.</h1>
-    <p class="reveal" style="margin-top: 20px;">Milujem minimalismus, čisté UI a plynulé animační přechody inspirované Apple designem.</p>
-    <div class="md:w-1/2">
-    <img src="/images/placeholder-image.jpg" alt="Ukázkový obrázek" class="rounded-2xl shadow-lg w-full h-auto" />
-  </div>
-</section>
+  <section id="intro">
+    <div class="reveal">
+      <h1 style="font-size: 64px; max-width: 700px;">Tvořím moderní weby, aplikace a digitální produkty.</h1>
+      <p style="margin-top: 20px;">Milujem minimalismus, čisté UI a plynulé animační přechody inspirované Apple designem.</p>
+      <img src="/images/placeholder-image.jpg" alt="Ukázkový obrázek" class="rounded-2xl shadow-lg w-full h-auto" />
+    </div>
+  </section>
 
   <!-- ABOUT -->
   <section id="about">
@@ -124,18 +127,30 @@
     window.addEventListener('scroll', revealOnScroll);
     window.onload = revealOnScroll;
 
-    /* THEME TOGGLE */
+    // THEME TOGGLE
     const themeBtn = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) document.body.classList.toggle('dark', savedTheme === 'dark');
-    themeBtn.innerText = document.body.classList.contains('dark') ? '☀️' : '🌙';
+    updateTheme();
 
     themeBtn.onclick = () => {
       document.body.classList.toggle('dark');
+      updateTheme();
+    };
+
+    function updateTheme() {
       const isDark = document.body.classList.contains('dark');
       localStorage.setItem('theme', isDark ? 'dark' : 'light');
-      themeBtn.innerText = isDark ? '☀️' : '🌙';
-    };
+
+      // Změna ikony
+      themeIcon.innerHTML = isDark
+        ? `<path d="M12 18a6 6 0 100-12 6 6 0 000 12zm0-14a1 1 0 011 1v2a1 1 0 11-2 0V5a1 1 0 011-1zm0 14a1 1 0 011 1v2a1 1 0 11-2 0v-2a1 1 0 011-1zm9-7a1 1 0 110 2h-2a1 1 0 110-2h2zm-14 0a1 1 0 110 2H5a1 1 0 110-2h2zm10.07-7.07a1 1 0 011.41 1.41l-1.42 1.42a1 1 0 11-1.41-1.41l1.42-1.42zm-10.14 10.14a1 1 0 011.41 1.41l-1.42 1.42a1 1 0 11-1.41-1.41l1.42-1.42zm10.14 1.42a1 1 0 10-1.41 1.41l1.42 1.42a1 1 0 101.41-1.41l-1.42-1.42zm-10.14-10.14a1 1 0 10-1.41 1.41L5.93 8.93a1 1 0 101.41-1.41l-1.42-1.42z"/>`
+        : `<path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/>`;
+
+      // Hamburger barva
+      hamburger.querySelectorAll('span').forEach(span => span.style.background = isDark ? '#fff' : '#111');
+    }
   </script>
 </body>
 </html>
