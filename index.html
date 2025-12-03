@@ -1,15 +1,468 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <h1>Alorum</h1>
-    <a href="https://www.kanoe.cz">
-        <button>Kanoe.cz<button>
-    </a>
-  </body>
-</html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Alorum — Portfolio</title>
 
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #0f1724;
+      --card: rgba(255,255,255,0.06);
+      --glass: rgba(255,255,255,0.06);
+      --accent: linear-gradient(90deg,#6EE7B7,#60A5FA 60%, #C084FC 100%);
+      --muted: rgba(255,255,255,0.6);
+      --glass-2: rgba(255,255,255,0.03);
+      --radius: 14px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: radial-gradient(1200px 500px at 10% 10%, rgba(96,165,250,0.08), transparent 8%),
+                  radial-gradient(900px 400px at 90% 90%, rgba(192,132,252,0.05), transparent 8%),
+                  var(--bg);
+      color: #fff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding:32px;
+    }
+
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      max-width:1200px;
+      margin:0 auto 28px;
+    }
+
+    .brand{
+      display:flex;
+      gap:14px;
+      align-items:center;
+      text-decoration:none;
+      color:inherit;
+    }
+
+    .logo{
+      width:56px;
+      height:56px;
+      border-radius:12px;
+      background:var(--accent);
+      display:grid;
+      place-items:center;
+      font-family:"Poppins";
+      font-weight:800;
+      color:#081029;
+      box-shadow: 0 6px 20px rgba(2,6,23,0.6);
+    }
+
+    nav{display:flex; gap:12px; align-items:center;}
+    nav a{
+      color:var(--muted);
+      text-decoration:none;
+      padding:10px 12px;
+      border-radius:10px;
+      font-weight:600;
+      transition:all .18s ease;
+    }
+    nav a:hover{ color:#fff; transform:translateY(-3px); background:var(--glass-2); }
+
+    .btn-extern{
+      background:transparent;
+      border:1px solid rgba(255,255,255,0.06);
+      padding:10px 14px;
+      border-radius:10px;
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      color:var(--muted);
+      text-decoration:none;
+      font-weight:700;
+    }
+
+    /* HERO */
+    .hero{
+      max-width:1200px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns: 1fr 420px;
+      gap:28px;
+      align-items:center;
+    }
+
+    .hero-card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border-radius: var(--radius);
+      padding:34px;
+      box-shadow: 0 8px 30px rgba(2,6,23,0.6);
+      backdrop-filter: blur(6px);
+    }
+
+    h1{
+      margin:0 0 6px 0;
+      font-family:"Poppins";
+      font-weight:800;
+      letter-spacing:-0.02em;
+      font-size:44px;
+      line-height:1.02;
+      background:var(--accent);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    p.lead{
+      margin:12px 0 0 0;
+      color:var(--muted);
+      font-size:16px;
+      max-width:70ch;
+    }
+
+    .hero-meta{
+      margin-top:18px;
+      display:flex;
+      gap:12px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .pill{
+      background:var(--glass);
+      padding:8px 12px;
+      border-radius:999px;
+      font-weight:600;
+      color:#fff;
+      font-size:14px;
+      box-shadow: inset 0 -10px 30px rgba(255,255,255,0.02);
+    }
+
+    /* RIGHT SIDEBAR */
+    .profile{
+      background-image: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius: var(--radius);
+      padding:20px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      align-items:center;
+      text-align:center;
+    }
+    .avatar{
+      width:120px; height:120px; border-radius:18px; overflow:hidden;
+      box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+      border: 1px solid rgba(255,255,255,0.04);
+      background: linear-gradient(135deg,#1f2937,#0b1220);
+      display:grid; place-items:center;
+      font-weight:800; font-family:"Poppins"; font-size:42px;
+      color: #fff;
+    }
+    .socials{display:flex; gap:10px; margin-top:6px;}
+    .socials a{opacity:0.95; text-decoration:none; color:var(--muted); font-weight:700; padding:8px 10px; border-radius:10px;}
+    .socials a:hover{color:#fff; transform:translateY(-3px)}
+
+    /* SECTIONS */
+    main{max-width:1200px; margin:28px auto; display:grid; gap:28px;}
+    .grid-3{display:grid; grid-template-columns: repeat(3,1fr); gap:18px;}
+    .card{
+      background:var(--card);
+      padding:18px;
+      border-radius:12px;
+      transition:transform .22s ease, box-shadow .22s ease;
+      border: 1px solid rgba(255,255,255,0.03);
+      overflow:hidden;
+    }
+    .card:hover{ transform:translateY(-8px); box-shadow: 0 12px 40px rgba(2,6,23,0.6); }
+
+    .section-title{display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:8px;}
+    .section-title h2{margin:0; font-size:20px; font-weight:700; color:#fff}
+    .section-sub{color:var(--muted); font-size:14px}
+
+    /* Projects */
+    .projects-grid{display:grid; grid-template-columns: repeat(3,1fr); gap:16px;}
+    .project{
+      display:flex; flex-direction:column; gap:10px;
+      border-radius:12px; overflow:hidden; min-height:220px;
+    }
+    .project .thumb{height:120px; background-size:cover; background-position:center;}
+    .project h3{margin:0; font-size:16px}
+    .project p{margin:0; color:var(--muted); font-size:13px}
+    .project .tags{display:flex; gap:8px; flex-wrap:wrap; margin-top:auto}
+    .tag{font-size:12px; padding:6px 8px; background:rgba(255,255,255,0.03); border-radius:8px}
+
+    /* Contact */
+    form{display:grid; gap:10px;}
+    input,textarea{
+      border-radius:10px; border:1px solid rgba(255,255,255,0.04);
+      background: rgba(0,0,0,0.12); color:#fff; padding:12px; outline:none;
+      font-size:14px;
+    }
+    input:focus, textarea:focus{box-shadow:0 6px 22px rgba(96,165,250,0.06); border-color:rgba(96,165,250,0.18)}
+    .row{display:flex; gap:10px}
+    .row .col{flex:1}
+
+    .cta{
+      display:inline-flex; gap:10px; align-items:center;
+      padding:10px 16px; border-radius:10px; font-weight:800;
+      background:var(--accent); color:#081029; border:none; cursor:pointer;
+      box-shadow: 0 8px 30px rgba(96,165,250,0.12);
+    }
+
+    footer{max-width:1200px; margin:20px auto 0; color:var(--muted); text-align:center; font-size:13px}
+
+    /* Responsive */
+    @media (max-width:1000px){
+      .hero{ grid-template-columns: 1fr; }
+      .projects-grid, .grid-3{ grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width:640px){
+      body{padding:18px}
+      .projects-grid, .grid-3{ grid-template-columns: 1fr; }
+      h1{font-size:30px}
+      .logo{width:48px;height:48px;font-size:20px}
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <a class="brand" href="#hero" aria-label="Alorum home">
+      <div class="logo">BF</div>
+      <div>
+        <div style="font-weight:800">Břetislav Fišer</div>
+        <div style="font-size:12px;color:rgba(255,255,255,0.55);margin-top:3px">Design • Code • Story</div>
+      </div>
+    </a>
+
+    <nav>
+      <a href="#projects">Projekty</a>
+      <a href="#about">O mně</a>
+      <a href="#contact">Kontakt</a>
+      <!-- externí tlačítko zachovává odkaz co jsi poslal -->
+      <a class="btn-extern" href="https://www.kanoe.cz" target="_blank" rel="noopener noreferrer">Kanoe.cz</a>
+    </nav>
+  </header>
+
+  <section id="hero" class="hero">
+    <div class="hero-card" role="region" aria-labelledby="hero-heading">
+      <h1 id="hero-heading">Ahoj — já jsem Alorum</h1>
+      <p class="lead">Vytvářím krásné a funkční weby, interaktivní rozhraní a portfolia, která zaujmou. Pomohu ti s návrhem, implementací nebo s kompletním brandovým stylem.</p>
+
+      <div class="hero-meta" aria-hidden="false">
+        <div class="pill">Frontend • UI/UX</div>
+        <div class="pill">React / HTML / CSS</div>
+        <div class="pill">Dostupnost: <strong style="margin-left:6px">Na spolupráci</strong></div>
+      </div>
+
+      <div style="margin-top:18px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <a href="#projects" class="cta">Zobrazit projekty</a>
+        <a href="#contact" style="color:var(--muted); text-decoration:none; padding:10px 12px; border-radius:10px; background:transparent; border:1px solid rgba(255,255,255,0.03)">Napiš mi</a>
+      </div>
+    </div>
+
+    <aside class="profile" aria-label="Profil">
+      <div class="avatar" aria-hidden="true">A</div>
+      <div style="font-weight:700">Alorum — Web dev & Designer</div>
+      <div style="color:var(--muted);font-size:13px">Miluju čistý design, výkonný kód a rychlé iterace.</div>
+
+      <div class="socials" aria-hidden="false">
+        <a href="#" title="GitHub">GitHub</a>
+        <a href="#" title="Dribbble">Dribbble</a>
+        <a href="#" title="LinkedIn">LinkedIn</a>
+      </div>
+    </aside>
+  </section>
+
+  <main>
+    <!-- ABOUT -->
+    <section id="about" class="card" aria-labelledby="about-title">
+      <div class="section-title">
+        <div>
+          <h2 id="about-title">O mně</h2>
+          <div class="section-sub">Krátce o mých schopnostech a přístupu</div>
+        </div>
+        <div style="color:var(--muted);font-size:13px">Živě, moderně, přístupně</div>
+      </div>
+
+      <div style="display:grid; grid-template-columns: 1fr 300px; gap:18px;">
+        <div>
+          <p style="color:var(--muted);margin-top:0">Jsem zaměřený na frontend — vytvářím responsivní stránky, interaktivní UI a rychlé prototypy. Pracuji s HTML, CSS (moderní techniky), JavaScriptem a frameworky jako React. Důležité je pro mě dobré UX, přístupnost a výkon.</p>
+
+          <ul style="margin:12px 0 0 18px;color:var(--muted)">
+            <li>Design & prototypování (Figma koncepty)</li>
+            <li>Responsivní a přístupné rozhraní</li>
+            <li>Optimalizace výkonu a SEO základy</li>
+          </ul>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div class="pill">Praha, CZ</div>
+          <div class="pill">Otevřen k možným projektům</div>
+          <div class="pill">Jazyk: Čeština, Angličtina</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="section-title" style="margin-bottom:12px;">
+        <div>
+          <h2>Projekty</h2>
+          <div class="section-sub">Vybrané práce — klikni pro podrobnosti</div>
+        </div>
+        <div style="color:var(--muted); font-size:13px">3 ukázky</div>
+      </div>
+
+      <div class="projects-grid">
+        <!-- Project 1 -->
+        <article class="card project" tabindex="0" aria-labelledby="p1-title">
+          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=6f6c8a6b9a2a5f2d6d8f3f6e5b1c8e2b');"></div>
+          <div>
+            <h3 id="p1-title">Responzivní e-shop</h3>
+            <p>Design a implementace moderního e-shopu s optimalizovaným checkoutem a animacemi.</p>
+            <div class="tags" style="margin-top:10px">
+              <span class="tag">React</span><span class="tag">Stripe</span><span class="tag">Accessibility</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="card project" tabindex="0" aria-labelledby="p2-title">
+          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=9d4c0f4b7d2a1f9dca3c6b4f3a9f8f7e');"></div>
+          <div>
+            <h3 id="p2-title">Portfolio pro umělce</h3>
+            <p>Minimalistické portfolio s dynamickým načítáním galerií a správcem obsahu.</p>
+            <div class="tags" style="margin-top:10px">
+              <span class="tag">Next.js</span><span class="tag">CMS</span><span class="tag">Performance</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 3 -->
+        <article class="card project" tabindex="0" aria-labelledby="p3-title">
+          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=3fcb6d5c3b8a6b4f1a9a3c5f3d8e2f4a');"></div>
+          <div>
+            <h3 id="p3-title">Aplikace pro rezervace</h3>
+            <p>Mobile-first aplikace s offline módem a rychlým UX pro objednávání a rezervace.</p>
+            <div class="tags" style="margin-top:10px">
+              <span class="tag">PWA</span><span class="tag">Service Workers</span><span class="tag">UX</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- EXTRA STUFF: skills / testimonials -->
+    <section class="card" aria-labelledby="skills-title">
+      <div class="section-title">
+        <h2 id="skills-title">Dovednosti</h2>
+        <div class="section-sub">Technologie & přístup</div>
+      </div>
+
+      <div style="display:flex;gap:14px;flex-wrap:wrap">
+        <div style="flex:1;min-width:220px">
+          <h3 style="margin:0 0 6px 0">Frontend</h3>
+          <p class="section-sub">HTML, CSS (Flex/Grid), SASS, Responsive design, Animace</p>
+        </div>
+        <div style="flex:1;min-width:220px">
+          <h3 style="margin:0 0 6px 0">Frameworky</h3>
+          <p class="section-sub">React, Next.js, Vite</p>
+        </div>
+        <div style="flex:1;min-width:220px">
+          <h3 style="margin:0 0 6px 0">Další</h3>
+          <p class="section-sub">Performance, A11Y, SEO, Testing</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="card" aria-labelledby="contact-title">
+      <div class="section-title">
+        <h2 id="contact-title">Kontakt</h2>
+        <div class="section-sub">Rychlý kontakt — odpovím do 48 hodin</div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 360px;gap:18px;">
+        <div>
+          <form id="contactForm" onsubmit="handleSubmit(event)">
+            <div class="row">
+              <div class="col"><input id="name" name="name" placeholder="Tvoje jméno" required></div>
+              <div class="col"><input id="email" name="email" type="email" placeholder="Email" required></div>
+            </div>
+            <input id="subject" name="subject" placeholder="Předmět" required>
+            <textarea id="message" name="message" rows="6" placeholder="O co jde? Popiš prosím stručně." required></textarea>
+
+            <div style="display:flex;gap:10px;align-items:center;margin-top:6px">
+              <button type="submit" class="cta">Odeslat</button>
+              <div style="color:var(--muted);font-size:13px">Nebo napiš přímo na <strong style="color:#fff">tvoje@email.cz</strong></div>
+            </div>
+          </form>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div class="card" style="background:transparent; box-shadow:none; border:1px dashed rgba(255,255,255,0.03)">
+            <strong>Rychlé info</strong>
+            <div style="color:var(--muted); margin-top:8px; font-size:14px">
+              Cena projektu: dle rozsahu — rád připravím odhad.<br>
+              Preferuji remote nebo kombinovaně (Praha).
+            </div>
+          </div>
+
+          <div class="card" style="background:transparent; box-shadow:none; border:1px dashed rgba(255,255,255,0.03)">
+            <strong>Pracovní postup</strong>
+            <ol style="color:var(--muted); margin:8px 0 0 18px; font-size:14px">
+              <li>Brief / konzultace</li>
+              <li>Wireframe & návrh</li>
+              <li>Implementace & testování</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    © <span id="year"></span> Břetislav Fišer — vytvořeno s ♥. Šablona upravitelná podle tvých přání.
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Simple contact handler (client-side only)
+    function handleSubmit(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const subj = document.getElementById('subject').value.trim();
+      const msg = document.getElementById('message').value.trim();
+
+      // fallback: open mailto
+      const body = encodeURIComponent(
+        "Jméno: " + name + "\\nEmail: " + email + "\\n\\n" + msg
+      );
+      const mailto = "mailto:fiserbretislav@email.cz?subject=" + encodeURIComponent(subj) + "&body=" + body;
+      window.location.href = mailto;
+    }
+
+    // Small keyboard accessibility: Enter on project -> open details (example)
+    document.querySelectorAll('.project').forEach(p=>{
+      p.addEventListener('keydown', (ev)=>{
+        if(ev.key === 'Enter') {
+          alert('Ukázka projektu — zde můžeš otevřít detail projektu nebo modal.');
+        }
+      });
+      p.addEventListener('click', ()=>{
+        alert('Ukázka projektu — zde můžeš otevřít detail projektu nebo modal.');
+      });
+    });
+  </script>
+</body>
+</html>
