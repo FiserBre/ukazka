@@ -30,7 +30,7 @@ function updateTheme(){
   localStorage.setItem('theme', isDark?'dark':'light');
 
   themeIcon.innerHTML = isDark
-    ? `<path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/>`
+    ? `<path d=""/>`
     : `<circle cx="12" cy="12" r="6"></circle>
        <line x1="12" y1="1" x2="12" y2="3"/>
        <line x1="12" y1="21" x2="12" y2="23"/>
