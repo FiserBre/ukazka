@@ -363,32 +363,31 @@ body.dark {
 
 
 
-/* ARCHITEKTONICKÁ MŘÍŽKA – VIDITELNÁ V OBOU REŽIMECH */
+/* ARCHITEKTONICKÁ MŘÍŽKA – GARANTOVANĚ VIDITELNÁ */
 .arch-grid-background {
   position: fixed;
   inset: 0;
-  z-index: 0; /* pod obsahem */
+  z-index: 0;
   pointer-events: none;
 
   background-image:
-    linear-gradient(to right, var(--grid-color) 1px, transparent 2px),
-    linear-gradient(to bottom, var(--grid-color) 1px, transparent 2px);
+    linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
 
   background-size: 40px 40px;
-  opacity: var(--grid-opacity);
-  transition: opacity 0.3s ease, background-color 0.3s ease;
+  opacity: 0.4; /* ZVÝŠENÁ VIDITELNOST */
 }
 
-/* Light mode – mřížka lehce tmavší */
+/* Light mode */
 :root {
-  --grid-color: rgba(0, 0, 0, 0.18);
-  --grid-opacity: 1;
+  --grid-color: rgba(0, 0, 0, 0.25);
 }
 
-/* Dark mode – mřížka lehce světlejší */
+/* Dark mode */
 @media (prefers-color-scheme: dark) {
   :root {
-    --grid-color: rgba(255, 255, 255, 0.18);
-    --grid-opacity: 1;
+    --grid-color: rgba(255, 255, 255, 0.22);
+  }
+}ity: 1;
   }
 }
