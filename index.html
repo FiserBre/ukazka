@@ -9,99 +9,95 @@
     body { font-family: Arial, sans-serif; background: #f5f5f7; color: #111; }
 
     /* Floating Apple-style Navbar */
-    .navbar-wrapper {
-      position: fixed;
-      top: 20px;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      z-index: 1000;
-      pointer-events: none;
-    }
-    .navbar {
-      width: 90%;
-      max-width: 1100px;
-      padding: 12px 24px;
-      border-radius: 20px;
-      backdrop-filter: blur(14px);
-      background: rgba(255, 255, 255, 0.3);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      pointer-events: auto;
-      border: 1px solid rgba(255,255,255,0.5);
-    }
+    .navbar-wrapper { position: fixed; top: 20px; width: 100%; display: flex; justify-content: center; z-index: 1000; pointer-events: none; }
+    .navbar { width: 90%; max-width: 1100px; padding: 12px 24px; border-radius: 20px; backdrop-filter: blur(14px); background: rgba(255,255,255,0.3); box-shadow: 0 4px 20px rgba(0,0,0,0.12); display: flex; justify-content: space-between; align-items: center; pointer-events: auto; border: 1px solid rgba(255,255,255,0.5); }
     .logo { font-weight: bold; font-size: 20px; }
-
-    nav a {
-      margin-left: 20px;
-      text-decoration: none;
-      color: #111;
-      font-weight: 500;
-      transition: opacity .2s;
-    }
+    nav a { margin-left: 20px; text-decoration: none; color: #111; font-weight: 500; transition: opacity .2s; }
     nav a:hover { opacity: 0.6; }
-
-    /* Hamburger */
     .hamburger { display: none; cursor: pointer; width: 30px; height: 22px; flex-direction: column; justify-content: space-between; }
     .hamburger span { height: 4px; background: #111; border-radius: 2px; transition: .3s; }
+    @media (max-width: 768px) { nav { display: none; } .hamburger { display: flex; } nav.open { display: flex; flex-direction: column; background: rgba(255,255,255,0.9); position: absolute; top: 70px; right: 20px; padding: 20px; border-radius: 16px; } nav.open a { margin: 10px 0; }}
 
-    @media (max-width: 768px) {
-      nav { display: none; }
-      .hamburger { display: flex; }
-      nav.open { display: flex; flex-direction: column; background: rgba(255,255,255,0.9); position: absolute; top: 70px; right: 20px; padding: 20px; border-radius: 16px; }
-      nav.open a { margin: 10px 0; }
-    }
+    /* Layout */
+    section { min-height: 100vh; padding: 140px 10% 80px; display: flex; flex-direction: column; justify-content: center; }
+    h2 { font-size: 42px; margin-bottom: 20px; }
+    p { font-size: 20px; line-height: 1.6; max-width: 700px; }
 
-    /* Section styling */
-    section { min-height: 100vh; padding: 120px 10%; display: flex; align-items: center; }
-
-    .hero h1 { font-size: 64px; font-weight: bold; margin-bottom: 20px; opacity: 0; transform: translateY(40px); transition: 1s; }
-    .hero p { font-size: 20px; max-width: 500px; opacity: 0; transform: translateY(40px); transition: 1s .2s; }
-
+    /* Reveal animations */
     .reveal { opacity: 0; transform: translateY(60px); transition: 1s; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
+    /* Card grid */
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; margin-top: 32px; }
+    .card { background: white; padding: 28px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); transition: .3s; }
+    .card:hover { transform: translateY(-6px); box-shadow: 0 20px 45px rgba(0,0,0,0.12); }
+
+    /* Contact box */
+    .contact-box { background: white; padding: 40px; border-radius: 20px; max-width: 600px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
   </style>
 </head>
 <body>
+
+  <!-- NAVBAR -->
   <div class="navbar-wrapper">
     <div class="navbar">
       <div class="logo">Portfolio</div>
       <nav id="navLinks">
+        <a href="#intro">Úvod</a>
         <a href="#about">O mně</a>
+        <a href="#skills">Dovednosti</a>
         <a href="#projects">Projekty</a>
         <a href="#contact">Kontakt</a>
       </nav>
-      <div class="hamburger" id="hamburger">
-        <span></span><span></span><span></span>
-      </div>
+      <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
     </div>
   </div>
 
-  <section class="hero">
-    <h1 class="reveal">Ahoj, jsem vývojář</h1>
-    <p class="reveal">Tvořím moderní a čisté weby, aplikace a digitální projekty. Miluju minimalismus a plynulé animační přechody ve stylu Apple.</p>
+  <!-- INTRO / HERO -->
+  <section id="intro">
+    <h1 class="reveal" style="font-size: 64px; max-width: 700px;">Tvořím moderní weby, aplikace a digitální produkty.</h1>
+    <p class="reveal" style="margin-top: 20px;">Milujem minimalismus, čisté UI a plynulé animační přechody inspirované Apple designem.</p>
   </section>
 
+  <!-- ABOUT -->
   <section id="about">
     <div class="reveal">
-      <h2>O mně</h2><br>
-      <p>Jsem mladý vývojář, který se zaměřuje na moderní design, čistý kód a perfektní uživatelský zážitek.</p>
+      <h2>Kdo jsem</h2>
+      <p>Jsem mladý vývojář zaměřený na front-end, design a moderní UX. Baví mě vytvářet projekty, které vypadají skvěle, fungují plynule a působí profesionálně.</p>
     </div>
   </section>
 
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="reveal">
+      <h2>Dovednosti</h2>
+      <p>Technologie, ve kterých pracuji nejčastěji.</p>
+      <div class="grid" style="margin-top: 40px;">
+        <div class="card"><h3>HTML / CSS</h3><p>Moderní layouty, animace, responzivní design, čistý UI styl.</p></div>
+        <div class="card"><h3>JavaScript</h3><p>Interaktivita, animace, dynamické prvky webu.</p></div>
+        <div class="card"><h3>Design</h3><p>Minimalistické UI, UX logika, moderní kompozice.</p></div>
+        <div class="card"><h3>Git</h3><p>Verzování, práce v týmu, deployment workflow.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
   <section id="projects">
     <div class="reveal">
-      <h2>Moje projekty</h2><br>
-      <p>Ukázky projektů, které jsem tvořil nebo na jejichž vývoji jsem se podílel.</p>
+      <h2>Projekty</h2>
+      <p>Vybrané projekty, na kterých jsem pracoval.</p>
+      <div class="grid">
+        <div class="card"><h3>Portfolio Web</h3><p>Moderní, čistý a plynulý web s Apple styl animační logikou.</p></div>
+        <div class="card"><h3>Landing Page</h3><p>Rychlý a extrémně moderní landing pro startup.</p></div>
+        <div class="card"><h3>UI Design System</h3><p>Sjednocený vizuální jazyk a komponenty pro malosériovou aplikaci.</p></div>
+      </div>
     </div>
   </section>
 
+  <!-- CONTACT -->
   <section id="contact">
-    <div class="reveal">
-      <h2>Kontakt</h2><br>
+    <div class="reveal contact-box">
+      <h2>Kontakt</h2>
       <p>Chceš se mnou spolupracovat? Napiš mi!</p>
     </div>
   </section>
@@ -109,20 +105,10 @@
   <script>
     const hamburger = document.getElementById("hamburger");
     const nav = document.getElementById("navLinks");
-
     hamburger.onclick = () => nav.classList.toggle("open");
 
     const reveals = document.querySelectorAll('.reveal');
-
-    const revealOnScroll = () => {
-      reveals.forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight * 0.8) {
-          el.classList.add('visible');
-        }
-      });
-    };
-
+    const revealOnScroll = () => { reveals.forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight * 0.8) el.classList.add('visible'); }); };
     window.addEventListener('scroll', revealOnScroll);
     window.onload = revealOnScroll;
   </script>
