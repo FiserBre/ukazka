@@ -32,16 +32,36 @@
   .navbar:hover { background: rgba(255,255,255,0.95); box-shadow:0 12px 30px rgba(0,0,0,0.15); }
 
   .logo { font-weight:bold; font-size:20px; }
-  nav a { margin-left:20px; text-decoration:none; color:#111; font-weight:500; transition:opacity .2s; }
-  nav a:hover { opacity:0.6; }
-  .hamburger { display:none; cursor:pointer; width:30px; height:22px; flex-direction:column; justify-content:space-between; }
-  .hamburger span { height:4px; background:#111; border-radius:2px; transition:.3s; }
+  nav.nav a { margin-left:20px; text-decoration:none; color:#111; font-weight:500; transition:opacity .2s; }
+  nav.nav a:hover { opacity:0.6; }
 
+  /* Hamburger */
+  .hamburger {
+    display: none;
+    cursor: pointer;
+    width: 30px;
+    height: 22px;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 1001;
+  }
+  .hamburger span {
+    display: block;
+    height: 4px;
+    background: #111;
+    border-radius: 2px;
+    transition: all 0.4s ease;
+  }
+  .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+  .hamburger.active span:nth-child(2) { opacity:0; }
+  .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+
+  /* Mobile nav */
   @media (max-width:768px){
-    nav { display:none; }
     .hamburger { display:flex; }
-    nav.open { display:flex; flex-direction:column; background: rgba(255,255,255,0.95); position:absolute; top:70px; right:20px; padding:20px; border-radius:16px; box-shadow:0 12px 30px rgba(0,0,0,0.1);}
-    nav.open a { margin:10px 0; }
+    nav.nav { display:none; position:absolute; top:70px; right:20px; background: rgba(255,255,255,0.95); flex-direction:column; padding:20px; border-radius:16px; box-shadow:0 12px 30px rgba(0,0,0,0.1);}
+    nav.nav.show { display:flex; }
+    nav.nav.show a { margin:10px 0; }
   }
 
   /* Sections */
@@ -55,9 +75,7 @@
 
   /* Grid / Cards */
   .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:32px; margin-top:32px; }
-  .card {
-    background:white; padding:28px; border-radius:20px; box-shadow:0 10px 30px rgba(0,0,0,0.08); transition:0.3s;
-  }
+  .card { background:white; padding:28px; border-radius:20px; box-shadow:0 10px 30px rgba(0,0,0,0.08); transition:0.3s; }
   .card:hover { transform:translateY(-6px); box-shadow:0 20px 45px rgba(0,0,0,0.12); }
 
   /* Contact */
@@ -66,8 +84,9 @@
   /* Dark Mode */
   body.dark { background:#111; color:#f5f5f7; }
   body.dark .navbar { background: rgba(0,0,0,0.4); border-color:rgba(255,255,255,0.2); }
-  body.dark nav a { color:#f5f5f7; }
+  body.dark nav.nav a { color:#f5f5f7; }
   body.dark .card, body.dark .contact-box { background:#1c1c1c; box-shadow:0 10px 30px rgba(255,255,255,0.05); }
+  body.dark .hamburger span { background:#fff; }
 
   /* Interaktivní pozadí */
   .bg-dot {
@@ -80,7 +99,7 @@
     animation: float 6s ease-in-out infinite;
   }
   @keyframes float {
-    0%, 100% { transform: translateY(0) translateX(0); }
+    0%,100% { transform: translateY(0) translateX(0); }
     50% { transform: translateY(-20px) translateX(10px); }
   }
 </style>
@@ -91,17 +110,21 @@
 <div class="navbar-wrapper">
   <div class="navbar">
     <div class="logo">Portfolio</div>
-    <nav id="navLinks">
+    <nav class="nav" id="navLinks">
       <a href="#intro">Úvod</a>
       <a href="#about">O mně</a>
       <a href="#skills">Dovednosti</a>
       <a href="#projects">Projekty</a>
       <a href="#contact">Kontakt</a>
     </nav>
-    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+    <div class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
     <div id="themeToggle" style="margin-left:20px; cursor:pointer; display:flex; align-items:center;">
       <svg id="themeIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="6"></circle> <!-- slunce -->
+        <circle cx="12" cy="12" r="6"></circle>
         <line x1="12" y1="1" x2="12" y2="3"/>
         <line x1="12" y1="21" x2="12" y2="23"/>
         <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
@@ -166,12 +189,12 @@
 <script>
   // Hamburger toggle
   const hamburger = document.querySelector(".hamburger");
-const nav = document.querySelector(".nav");
+  const nav = document.querySelector(".nav");
+  hamburger.addEventListener("click", () => {
+    hamburger.classList.toggle("active");
+    nav.classList.toggle("show");
+  });
 
-hamburger.addEventListener("click", () => {
-  hamburger.classList.toggle("active");
-  nav.classList.toggle("show");
-});
   // Reveal on scroll
   const reveals = document.querySelectorAll('.reveal');
   const revealOnScroll = () => {
@@ -183,15 +206,15 @@ hamburger.addEventListener("click", () => {
   // Theme toggle
   const themeBtn = document.getElementById('themeToggle');
   const themeIcon = document.getElementById('themeIcon');
-  const savedTheme = localStorage.getItem('theme');
-  if(savedTheme) document.body.classList.toggle('dark', savedTheme==='dark');
+  if(localStorage.getItem('theme')==='dark') document.body.classList.add('dark');
+  updateTheme();
 
   function updateTheme(){
     const isDark = document.body.classList.contains('dark');
     localStorage.setItem('theme', isDark?'dark':'light');
 
     themeIcon.innerHTML = isDark
-      ? `<path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/>` // měsíc
+      ? `<path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/>`
       : `<circle cx="12" cy="12" r="6"></circle>
          <line x1="12" y1="1" x2="12" y2="3"/>
          <line x1="12" y1="21" x2="12" y2="23"/>
@@ -202,7 +225,7 @@ hamburger.addEventListener("click", () => {
          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>`;
 
-    // hamburger barva
+    // Hamburger barva
     hamburger.querySelectorAll('span').forEach(span=>span.style.background=isDark?'#fff':'#111');
   }
 
@@ -210,7 +233,6 @@ hamburger.addEventListener("click", () => {
     document.body.classList.toggle('dark');
     updateTheme();
   };
-  updateTheme();
 
   // Interaktivní pozadí
   for(let i=0;i<30;i++){
