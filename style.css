@@ -65,18 +65,58 @@ body.dark .card, body.dark .contact-box { background:#1c1c1c; box-shadow:0 10px 
 body.dark .hamburger span { background:#fff; }
 
 /*rotujici text*/
-.rotating-text {
-  display: inline-block;
-  border-right: 2px solid #111; /* kurzor */
-  padding-right: 5px;
-  animation: blink 0.7s infinite;
+/* Center intro */
+.intro-section {
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+  text-align:center;
+  padding:0 10%;
+  position:relative;
 }
 
-body.dark .rotating-text {
-  border-right-color: #fff;
+.intro-title {
+  font-size: 4rem; /* velký text */
+  font-weight: bold;
+  background: linear-gradient(90deg, #ff6ec4, #7873f5, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+}
+
+.rotating-text {
+  border-right: 2px solid currentColor; /* kurzor */
+  padding-right: 5px;
+  animation: blink 0.7s infinite;
 }
 
 @keyframes blink {
   0%, 50%, 100% { border-color: currentColor; }
   25%, 75% { border-color: transparent; }
 }
+
+/* P element fade-in */
+.intro-subtitle {
+  opacity:0;
+  transform: translateY(20px);
+  transition: opacity 1s ease, transform 1s ease;
+  font-size:1.5rem;
+  margin-top:1rem;
+}
+
+.intro-subtitle.visible {
+  opacity:1;
+  transform: translateY(0);
+}
+
+/* Image styling */
+.intro-image {
+  margin-top:2rem;
+  max-width:600px;
+  width:100%;
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+
