@@ -1,89 +1,133 @@
 <!DOCTYPE html>
 <html lang="cs">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Portfolio</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-<!-- Navbar -->
-<div class="navbar-wrapper">
-  <div class="navbar">
-    <div class="logo">Portfolio</div>
-    <nav class="nav" id="navLinks">
-      <a href="#intro">Úvod</a>
-      <a href="#about">O mně</a>
-      <a href="#skills">Dovednosti</a>
-      <a href="#projects">Projekty</a>
-      <a href="#contact">Kontakt</a>
-    </nav>
-    <div class="hamburger">
-      <span></span>
-      <span></span>
-      <span></span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <div class="navbar-wrapper">
+      <div class="navbar">
+        <div class="logo">Portfolio</div>
+        <nav class="nav" id="navLinks">
+          <a href="#intro">Úvod</a>
+          <a href="#about">O mně</a>
+          <a href="#skills">Dovednosti</a>
+          <a href="#projects">Projekty</a>
+          <a href="#contact">Kontakt</a>
+        </nav>
+        <div id="themeToggle">
+          <svg
+            id="themeIcon"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M22 15.8442C20.6866 16.4382 19.2286 16.7688 17.6935 16.7688C11.9153 16.7688 7.23116 12.0847 7.23116 6.30654C7.23116 4.77135 7.5618 3.3134 8.15577 2C4.52576 3.64163 2 7.2947 2 11.5377C2 17.3159 6.68414 22 12.4623 22C16.7053 22 20.3584 19.4742 22 15.8442Z"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
     </div>
-    <div id="themeToggle">
-      <svg id="themeIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M22 15.8442C20.6866 16.4382 19.2286 16.7688 17.6935 16.7688C11.9153 16.7688 7.23116 12.0847 7.23116 6.30654C7.23116 4.77135 7.5618 3.3134 8.15577 2C4.52576 3.64163 2 7.2947 2 11.5377C2 17.3159 6.68414 22 12.4623 22C16.7053 22 20.3584 19.4742 22 15.8442Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </div>
-  </div>
-</div>
 
-<!-- Sections -->
-<section id="intro" class="intro-section">
-  <div class="reveal">
-    <h1 class="intro-title">
-      Tvořím <span class="rotating-text" id="rotatingText"></span>
-    </h1>
-    <p class="intro-subtitle" id="introSubtitle">Milujem minimalismus, čisté UI a plynulé animační přechody inspirované Apple designem.</p>
-    <img src="/images/placeholder-image.jpg" alt="Ukázkový obrázek" class="intro-image" />
-  </div>
-</section>
+    <!-- Sections -->
+    <section id="intro" class="intro-section">
+      <div class="reveal">
+        <h1 class="intro-title">
+          Tvořím <span class="rotating-text" id="rotatingText"></span>
+        </h1>
+        <p class="intro-subtitle" id="introSubtitle">
+          Milujem minimalismus, čisté UI a plynulé animační přechody inspirované
+          Apple designem.
+        </p>
+        <img
+          src="/images/placeholder-image.jpg"
+          alt="Ukázkový obrázek"
+          class="intro-image"
+        />
+      </div>
+    </section>
 
+    <section id="about">
+      <div class="reveal">
+        <h2>Kdo jsem</h2>
+        <p>
+          Jsem mladý vývojář zaměřený na front-end, design a moderní UX. Baví mě
+          vytvářet projekty, které vypadají skvěle, fungují plynule a působí
+          profesionálně.
+        </p>
+      </div>
+    </section>
 
+    <section id="skills">
+      <div class="reveal">
+        <h2>Dovednosti</h2>
+        <p>Technologie, ve kterých pracuji nejčastěji.</p>
+        <div class="grid">
+          <div class="card">
+            <h3>HTML / CSS</h3>
+            <p>Moderní layouty, animace, responzivní design, čistý UI styl.</p>
+          </div>
+          <div class="card">
+            <h3>JavaScript</h3>
+            <p>Interaktivita, animace, dynamické prvky webu.</p>
+          </div>
+          <div class="card">
+            <h3>Design</h3>
+            <p>Minimalistické UI, UX logika, moderní kompozice.</p>
+          </div>
+          <div class="card">
+            <h3>Git</h3>
+            <p>Verzování, práce v týmu, deployment workflow.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<section id="about">
-  <div class="reveal">
-    <h2>Kdo jsem</h2>
-    <p>Jsem mladý vývojář zaměřený na front-end, design a moderní UX. Baví mě vytvářet projekty, které vypadají skvěle, fungují plynule a působí profesionálně.</p>
-  </div>
-</section>
+    <section id="projects">
+      <div class="reveal">
+        <h2>Projekty</h2>
+        <p>Vybrané projekty, na kterých jsem pracoval.</p>
+        <div class="grid">
+          <div class="card">
+            <h3>Portfolio Web</h3>
+            <p>Moderní, čistý a plynulý web s Apple styl animační logikou.</p>
+          </div>
+          <div class="card">
+            <h3>Landing Page</h3>
+            <p>Rychlý a extrémně moderní landing pro startup.</p>
+          </div>
+          <div class="card">
+            <h3>UI Design System</h3>
+            <p>
+              Sjednocený vizuální jazyk a komponenty pro malosériovou aplikaci.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<section id="skills">
-  <div class="reveal">
-    <h2>Dovednosti</h2>
-    <p>Technologie, ve kterých pracuji nejčastěji.</p>
-    <div class="grid">
-      <div class="card"><h3>HTML / CSS</h3><p>Moderní layouty, animace, responzivní design, čistý UI styl.</p></div>
-      <div class="card"><h3>JavaScript</h3><p>Interaktivita, animace, dynamické prvky webu.</p></div>
-      <div class="card"><h3>Design</h3><p>Minimalistické UI, UX logika, moderní kompozice.</p></div>
-      <div class="card"><h3>Git</h3><p>Verzování, práce v týmu, deployment workflow.</p></div>
-    </div>
-  </div>
-</section>
+    <section id="contact">
+      <div class="reveal contact-box">
+        <h2>Kontakt</h2>
+        <p>Chceš se mnou spolupracovat? Napiš mi!</p>
+      </div>
+    </section>
 
-<section id="projects">
-  <div class="reveal">
-    <h2>Projekty</h2>
-    <p>Vybrané projekty, na kterých jsem pracoval.</p>
-    <div class="grid">
-      <div class="card"><h3>Portfolio Web</h3><p>Moderní, čistý a plynulý web s Apple styl animační logikou.</p></div>
-      <div class="card"><h3>Landing Page</h3><p>Rychlý a extrémně moderní landing pro startup.</p></div>
-      <div class="card"><h3>UI Design System</h3><p>Sjednocený vizuální jazyk a komponenty pro malosériovou aplikaci.</p></div>
-    </div>
-  </div>
-</section>
-
-<section id="contact">
-  <div class="reveal contact-box">
-    <h2>Kontakt</h2>
-    <p>Chceš se mnou spolupracovat? Napiš mi!</p>
-  </div>
-</section>
-
-<script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
