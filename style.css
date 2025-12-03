@@ -63,3 +63,20 @@ body.dark .navbar { background: rgba(0,0,0,0.4); border-color:rgba(255,255,255,0
 body.dark nav.nav a { color:#f5f5f7; }
 body.dark .card, body.dark .contact-box { background:#1c1c1c; box-shadow:0 10px 30px rgba(255,255,255,0.05); }
 body.dark .hamburger span { background:#fff; }
+
+/*rotujici text*/
+.rotating-text {
+  display: inline-block;
+  border-right: 2px solid #111; /* kurzor */
+  padding-right: 5px;
+  animation: blink 0.7s infinite;
+}
+
+body.dark .rotating-text {
+  border-right-color: #fff;
+}
+
+@keyframes blink {
+  0%, 50%, 100% { border-color: currentColor; }
+  25%, 75% { border-color: transparent; }
+}
