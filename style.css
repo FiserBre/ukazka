@@ -77,13 +77,33 @@ body.dark .hamburger span { background:#fff; }
   position:relative;
 }
 
+/* === GRADIENT COLORS === */
+:root {
+  --grad-1: #ff6ec4;   /* růžová */
+  --grad-2: #7873f5;   /* modrá */
+  --grad-3: #000000;   /* light mode → černá */
+}
+
+body.dark {
+  --grad-3: #ffffff;   /* dark mode → bílá */
+}
+
+/* === TITULEK === */
 .intro-title {
-  font-size: 4rem; /* velký text */
+  font-size: 4rem;
   font-weight: bold;
-  background: linear-gradient(90deg, #ff6ec4, #7873f5, #ffffff);
+  background: linear-gradient(90deg, var(--grad-1), var(--grad-2), var(--grad-3));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 1rem;
+}
+
+/* === LOGO === */
+.logo {
+  font-weight: bold;
+  background: linear-gradient(90deg, var(--grad-1), var(--grad-2), var(--grad-3));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .rotating-text {
@@ -109,13 +129,4 @@ body.dark .hamburger span { background:#fff; }
 .intro-subtitle.visible {
   opacity:1;
   transform: translateY(0);
-}
-
-/* Image styling */
-.intro-image {
-  margin-top:2rem;
-  max-width:600px;
-  width:100%;
-  border-radius:20px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.1);
 }
