@@ -165,10 +165,13 @@
 
 <script>
   // Hamburger toggle
-  const hamburger = document.getElementById("hamburger");
-  const nav = document.getElementById("navLinks");
-  hamburger.onclick = () => nav.classList.toggle("open");
+  const hamburger = document.querySelector(".hamburger");
+const nav = document.querySelector(".nav");
 
+hamburger.addEventListener("click", () => {
+  hamburger.classList.toggle("active");
+  nav.classList.toggle("show");
+});
   // Reveal on scroll
   const reveals = document.querySelectorAll('.reveal');
   const revealOnScroll = () => {
