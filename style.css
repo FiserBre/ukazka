@@ -395,17 +395,53 @@ body.dark {
 
 
 
+.animations-offer {
+  padding: 80px 10%;
+  background: var(--bg);
+  color: var(--text);
+}
 
-.services { padding: 80px 10%; background: var(--bg); color: var(--text); }
-.services .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 32px; margin-top: 40px; }
-.services .card {
+.animations-offer .animation-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.animations-offer .card {
   background: var(--card-bg);
   padding: 24px;
   border-radius: 12px;
   box-shadow: var(--card-shadow);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.services .card:hover {
+
+.animations-offer .card:hover {
   transform: translateY(-8px);
   box-shadow: var(--card-shadow-hover);
+}
+
+.animations-offer .demo {
+  margin-top: 16px;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.04);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.animated-btn {
+  padding: 12px 20px;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.animated-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
