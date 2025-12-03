@@ -14,6 +14,7 @@ body {
   transition: background 0.3s, color 0.3s;
 }
 
+
 /* LIGHT / DARK mód přes prefers-color-scheme */
 @media (prefers-color-scheme: dark) {
   body {
