@@ -207,6 +207,13 @@ body.dark .hamburger span {
   margin-bottom: 1rem;
 }
 
+.logo {
+  font-weight: bold;
+  background: linear-gradient(90deg, #ff6ec4, #7873f5, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .rotating-text {
   border-right: 2px solid currentColor; /* kurzor */
   padding-right: 5px;
