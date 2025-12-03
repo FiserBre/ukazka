@@ -1,127 +1,93 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Břetislav Fišer</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Břetislav Fišer</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- [VOLITELNÉ] architektonické / grid pozadí nebo jiné pozadí -->
-  <div class="arch-grid-background"></div>
-
-  <!-- NAVBAR -->
-  <div class="navbar-wrapper">
-    <div class="navbar">
-      <div class="logo">Břetislav Fišer</div>
-      <nav class="nav" id="navLinks">
-        <a href="#intro">Úvod</a>
-        <a href="#about">O mně</a>
-        <a href="#skills">Dovednosti</a>
-        <a href="#services">Ukázky</a>
-        <a href="#projects">Projekty</a>
-        <a href="#contact">Kontakt</a>
-      </nav>
-      <div class="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-      <div id="themeToggle" style="margin-left:20px; display:flex; align-items:center; cursor:pointer;">
-        <svg id="themeIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M12 2V4M12 20V22M4 12H2M6.31412 6.31412L4.8999 4.8999M17.6859 6.31412L19.1001 4.8999M6.31412 17.69L4.8999 19.1042M17.6859 17.69L19.1001 19.1042M22 12H20M17 12C17 14.7614 14.7614 17 12 17C9.23858 17 7 14.7614 7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12Z"/>
-        </svg>
-      </div>
+<!-- Navbar -->
+<div class="navbar-wrapper">
+  <div class="navbar">
+    <div class="logo">Břetislav Fišer</div>
+    <nav class="nav" id="navLinks">
+      <a href="#intro">Úvod</a>
+      <a href="#about">O mně</a>
+      <a href="#skills">Dovednosti</a>
+      <a href="#projects">Projekty</a>
+      <a href="#contact">Kontakt</a>
+    </nav>
+    <div class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div id="themeToggle">
+      <svg id="themeIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="6"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
     </div>
   </div>
+</div>
 
-  <!-- HOME / HERO sekce — zůstává jak máš -->
-  <section id="intro" class="hero-section">
-    <div class="hero-content">
-      <h1 class="intro-title">Tvořím <span class="rotating-text" id="rotatingText"></span></h1>
-      <p class="intro-subtitle" id="introSubtitle">Milujem minimalismus, čisté UI a plynulé animační přechody inspirované moderním designem.</p>
-      <img src="/images/placeholder-image.jpg" alt="Ukázkový obrázek" class="intro-image" />
-    </div>
-  </section>
+<!-- Sections -->
+<section id="intro">
+  <div class="reveal">
+    <h1>Tvořím moderní weby, aplikace a digitální produkty.</h1>
+    <p>Milujem minimalismus, čisté UI a plynulé animační přechody inspirované Apple designem.</p>
+    <img src="/images/placeholder-image.jpg" alt="Ukázkový obrázek" class="rounded-2xl shadow-lg" />
+  </div>
+</section>
 
-  <!-- ABOUT -->
-  <section id="about" class="reveal-global section">
-    <h2>O mně</h2>
+<section id="about">
+  <div class="reveal">
+    <h2>Kdo jsem</h2>
     <p>Jsem mladý vývojář zaměřený na front-end, design a moderní UX. Baví mě vytvářet projekty, které vypadají skvěle, fungují plynule a působí profesionálně.</p>
-  </section>
+  </div>
+</section>
 
-  <!-- SKILLS -->
-  <section id="skills" class="reveal-global section">
+<section id="skills">
+  <div class="reveal">
     <h2>Dovednosti</h2>
-    <div class="grid skills-grid">
-      <div class="card">HTML / CSS</div>
-      <div class="card">JavaScript</div>
-      <div class="card">Design & UI/UX</div>
-      <div class="card">Git & Workflow</div>
+    <p>Technologie, ve kterých pracuji nejčastěji.</p>
+    <div class="grid">
+      <div class="card"><h3>HTML / CSS</h3><p>Moderní layouty, animace, responzivní design, čistý UI styl.</p></div>
+      <div class="card"><h3>JavaScript</h3><p>Interaktivita, animace, dynamické prvky webu.</p></div>
+      <div class="card"><h3>Design</h3><p>Minimalistické UI, UX logika, moderní kompozice.</p></div>
+      <div class="card"><h3>Git</h3><p>Verzování, práce v týmu, deployment workflow.</p></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- SERVICES / UKÁZKY ANIMACÍ a EFEKTŮ -->
-  <section id="services" class="reveal-global section">
-    <h2>Ukázky animací & efektů</h2>
-    <div class="animation-cards">
-      <div class="card demo-item">
-        <h3>Animovaný text (typování)</h3>
-        <p>Kinetická typografie: slova se mění plynule, jako v hero sekci.</p>
-        <div class="demo">
-          <span class="rotating" data-words='["weby","aplikace","produkty"]'></span>
-        </div>
-      </div>
-
-      <div class="card demo-item">
-        <h3>Scroll & reveal</h3>
-        <p>Obsah se objeví s animací při scrollu.</p>
-        <div class="demo reveal-demo">
-          <p>Vítej — tahle část se objevila s animací!</p>
-        </div>
-      </div>
-
-      <div class="card demo-item">
-        <h3>Hover & micro-interakce</h3>
-        <p>Tlačítka a interakce reagující na kurzor.</p>
-        <div class="demo">
-          <button class="demo-button">Hover mě</button>
-        </div>
-      </div>
-
-      <div class="card demo-item">
-        <h3>Stylové karty / grid</h3>
-        <p>Layout s animovaným vstupem a přechody.</p>
-        <div class="demo">
-          <div class="mini-card">Card A</div>
-          <div class="mini-card">Card B</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROJECTS -->
-  <section id="projects" class="reveal-global section">
+<section id="projects">
+  <div class="reveal">
     <h2>Projekty</h2>
-    <div class="grid projects-grid">
-      <div class="card project-card">Portfolio Web</div>
-      <div class="card project-card">Landing Page</div>
-      <div class="card project-card">UI Design System</div>
+    <p>Vybrané projekty, na kterých jsem pracoval.</p>
+    <div class="grid">
+      <div class="card"><h3>Portfolio Web</h3><p>Moderní, čistý a plynulý web s Apple styl animační logikou.</p></div>
+      <div class="card"><h3>Landing Page</h3><p>Rychlý a extrémně moderní landing pro startup.</p></div>
+      <div class="card"><h3>UI Design System</h3><p>Sjednocený vizuální jazyk a komponenty pro malosériovou aplikaci.</p></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- CONTACT -->
-  <section id="contact" class="reveal-global section">
+<section id="contact">
+  <div class="reveal contact-box">
     <h2>Kontakt</h2>
     <p>Chceš se mnou spolupracovat? Napiš mi!</p>
-  </section>
+  </div>
+</section>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <p>© 2025 Břetislav Fišer</p>
-  </footer>
-
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
