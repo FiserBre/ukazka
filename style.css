@@ -391,3 +391,21 @@ body.dark {
 }ity: 1;
   }
 }
+
+
+
+
+
+.services { padding: 80px 10%; background: var(--bg); color: var(--text); }
+.services .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 32px; margin-top: 40px; }
+.services .card {
+  background: var(--card-bg);
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.services .card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--card-shadow-hover);
+}
