@@ -465,7 +465,7 @@ body.scroll-lock {
 .screen {
   position: absolute;
   top: 1.5%; /* vzdálenost od horního okraje */
-  left: 5%; /* vzdálenost od levého okraje */
+  left: 4%; /* vzdálenost od levého okraje */
   right: 4%; /* šířka obrazovky telefonu */
   height: 97%; /* výška obrazovky telefonu */
   overflow: hidden;
@@ -486,6 +486,7 @@ body.scroll-lock {
   padding: 20px;
   font-family: sans-serif;
   margin-top: 20%;
+  text-align: center;
 }
 
 .light-mode {
