@@ -165,3 +165,19 @@ document.addEventListener("touchmove", (e) => {
   light.style.clipPath = `inset(0 ${100 - percent * 100}% 0 0)`;
   dark.style.clipPath = `inset(0 0 0 ${percent * 100}%)`;
 });
+
+let scrollPos = 0;
+
+function lockScroll() {
+  scrollPos = window.scrollY;
+  document.body.style.position = "fixed";
+  document.body.style.top = `-${scrollPos}px`;
+  document.body.style.width = "100%";
+}
+
+function unlockScroll() {
+  document.body.style.position = "";
+  document.body.style.top = "";
+  document.body.style.width = "";
+  window.scrollTo(0, scrollPos);
+}
