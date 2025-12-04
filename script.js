@@ -34,8 +34,8 @@ function updateTheme() {
   localStorage.setItem("theme", isDark ? "dark" : "light");
 
   themeIcon.innerHTML = isDark
-    ? `<path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/>`
-    : `<path d="M12 2V4M12 20V22M4 12H2M6.31412 6.31412L4.8999 4.8999M17.6859 6.31412L19.1001 4.8999M6.31412 17.69L4.8999 19.1042M17.6859 17.69L19.1001 19.1042M22 12H20M17 12C17 14.7614 14.7614 17 12 17C9.23858 17 7 14.7614 7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
+    ? `<path d="M12 2V4M12 20V22M4 12H2M6.31412 6.31412L4.8999 4.8999M17.6859 6.31412L19.1001 4.8999M6.31412 17.69L4.8999 19.1042M17.6859 17.69L19.1001 19.1042M22 12H20M17 12C17 14.7614 14.7614 17 12 17C9.23858 17 7 14.7614 7 12C7 9.23858 9.23858 7 12 7C14.7614 7 17 9.23858 17 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`
+    : `<path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/>`;
 
   hamburger
     .querySelectorAll("span")
@@ -43,7 +43,7 @@ function updateTheme() {
 }
 
 // ROTUJÍCÍ TEXT
-const words = ["weby", "aplikace", "digitální produkty"];
+const words = ["weby", "aplikace", "SQL databáze", "e-shopy", "fotografie"];
 let currentWord = 0;
 let currentChar = 0;
 let isDeleting = false;
@@ -125,3 +125,27 @@ function checkSectionPosition() {
 
 window.addEventListener("scroll", checkSectionPosition);
 
+const slider = document.querySelector(".horizontal-slider");
+const handle = document.querySelector(".horizontal-slider .handle");
+const light = document.querySelector(".light-mode");
+const dark = document.querySelector(".dark-mode");
+
+let isDragging = false;
+
+handle.addEventListener("mousedown", () => (isDragging = true));
+document.addEventListener("mouseup", () => (isDragging = false));
+document.addEventListener("mousemove", (e) => {
+  if (!isDragging) return;
+
+  const rect = slider.getBoundingClientRect();
+  let x = e.clientX - rect.left;
+  if (x < 0) x = 0;
+  if (x > rect.width) x = rect.width;
+
+  const percent = x / rect.width;
+  handle.style.left = `${x}px`;
+
+  // horizontální odhalení light/dark
+  light.style.clipPath = `inset(0 ${100 - percent * 100}% 0 0)`;
+  dark.style.clipPath = `inset(0 0 0 ${percent * 100}%)`;
+});
