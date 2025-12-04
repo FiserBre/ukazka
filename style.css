@@ -456,6 +456,25 @@ body.dark {
   z-index: 20;
 }
 
+@media (min-width: 525px) {
+  .phone-wrapper {
+    width: 255px; /* menší šířka */
+    height: 650px; /* menší výška */
+  }
+
+  .screen {
+    width: 235px;
+    bottom: 7px;
+    left: 5px;
+    top: 7px;
+  }
+
+  .horizontal-slider .handle {
+    width: 16px;
+    height: 60px;
+  }
+}
+
 .screen {
   position: absolute;
   top: 1.5%; /* vzdálenost od horního okraje */
@@ -464,7 +483,7 @@ body.dark {
   height: 97%; /* výška obrazovky telefonu */
   overflow: hidden;
   z-index: 10;
-  border-radius: 30px;
+  border-radius: 20px;
 }
 
 .light-mode,
