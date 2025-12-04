@@ -422,12 +422,6 @@ body.dark {
   transition: opacity 0.7s ease-out;
 }
 
-/* Scroll lock jen při animaci */
-body.scroll-lock {
-  overflow: hidden;
-  height: 100vh;
-}
-
 .phone-section {
   position: relative;
   width: 100%;

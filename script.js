@@ -87,43 +87,82 @@ const lines = document.querySelectorAll(".grad-line");
 const text = document.querySelector(".effects-text");
 
 let animationTriggered = false;
+let scrollLocked = false;
 
+// funkce pro blokování scrollu
+function lockScroll() {
+  scrollLocked = true;
+  document.body.style.overflow = "hidden";
+  document.documentElement.style.overflow = "hidden";
+}
+
+// funkce pro odblokování scrollu
+function unlockScroll() {
+  scrollLocked = false;
+  document.body.style.overflow = "";
+  document.documentElement.style.overflow = "";
+}
+
+// animace
 function startAnimation() {
   if (animationTriggered) return;
   animationTriggered = true;
 
-  document.body.classList.add("scroll-lock");
+  lockScroll();
 
-  // animate stripes
   lines.forEach((line, i) => {
     setTimeout(() => {
       line.style.width = "100%";
     }, i * 300);
   });
 
-  // show text at end
   setTimeout(() => {
     text.style.opacity = 1;
   }, lines.length * 300 + 300);
 
-  // unlock scroll when finished
   setTimeout(() => {
-    document.body.classList.remove("scroll-lock");
+    unlockScroll();
   }, lines.length * 300 + 1500);
 }
 
+// kontrola pozice sekce
 function checkSectionPosition() {
-  const rect = section.getBoundingClientRect();
+  if (animationTriggered) return;
 
-  // SPUSTÍ SE DŘÍV – například ve 35 % okna
+  const rect = section.getBoundingClientRect();
   const triggerPoint = window.innerHeight * 0;
 
-  if (rect.top < triggerPoint && rect.bottom > triggerPoint) {
+  if (rect.top <= triggerPoint) {
     startAnimation();
   }
 }
 
+// zachycení scrollu při locku
+function preventScroll(e) {
+  if (scrollLocked) {
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
+  }
+}
+
 window.addEventListener("scroll", checkSectionPosition);
+window.addEventListener("wheel", preventScroll, { passive: false });
+window.addEventListener("touchmove", preventScroll, { passive: false });
+window.addEventListener(
+  "keydown",
+  (e) => {
+    if (
+      scrollLocked &&
+      ["ArrowUp", "ArrowDown", "PageUp", "PageDown", "Space"].includes(e.code)
+    ) {
+      e.preventDefault();
+    }
+  },
+  { passive: false }
+);
+
+window.addEventListener("load", checkSectionPosition);
 
 const slider = document.querySelector(".horizontal-slider");
 const handle = document.querySelector(".horizontal-slider .handle");
@@ -165,19 +204,3 @@ document.addEventListener("touchmove", (e) => {
   light.style.clipPath = `inset(0 ${100 - percent * 100}% 0 0)`;
   dark.style.clipPath = `inset(0 0 0 ${percent * 100}%)`;
 });
-
-let scrollPos = 0;
-
-function lockScroll() {
-  scrollPos = window.scrollY;
-  document.body.style.position = "fixed";
-  document.body.style.top = `-${scrollPos}px`;
-  document.body.style.width = "100%";
-}
-
-function unlockScroll() {
-  document.body.style.position = "";
-  document.body.style.top = "";
-  document.body.style.width = "";
-  window.scrollTo(0, scrollPos);
-}
