@@ -171,36 +171,59 @@ const dark = document.querySelector(".dark-mode");
 
 let isDragging = false;
 
+// --- Myš ---
 handle.addEventListener("mousedown", () => (isDragging = true));
 document.addEventListener("mouseup", () => (isDragging = false));
 document.addEventListener("mousemove", (e) => {
   if (!isDragging) return;
 
+  e.preventDefault();
+
   const rect = slider.getBoundingClientRect();
   let x = e.clientX - rect.left;
-  if (x < 0) x = 0;
-  if (x > rect.width) x = rect.width;
+  x = Math.max(0, Math.min(x, rect.width));
 
   const percent = x / rect.width;
   handle.style.left = `${percent * 100}%`;
-
   light.style.clipPath = `inset(0 ${100 - percent * 100}% 0 0)`;
   dark.style.clipPath = `inset(0 0 0 ${percent * 100}%)`;
 });
 
+// --- Dotyk ---
 handle.addEventListener("touchstart", () => (isDragging = true));
 document.addEventListener("touchend", () => (isDragging = false));
-document.addEventListener("touchmove", (e) => {
-  if (!isDragging) return;
 
-  const rect = slider.getBoundingClientRect();
-  let x = e.touches[0].clientX - rect.left;
-  if (x < 0) x = 0;
-  if (x > rect.width) x = rect.width;
+// Pozor: { passive: false } umožní preventDefault blokovat scroll
+document.addEventListener(
+  "touchmove",
+  (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
 
-  const percent = x / rect.width;
-  handle.style.left = `${percent * 100}%`;
+    const rect = slider.getBoundingClientRect();
+    let x = e.touches[0].clientX - rect.left;
+    x = Math.max(0, Math.min(x, rect.width));
 
-  light.style.clipPath = `inset(0 ${100 - percent * 100}% 0 0)`;
-  dark.style.clipPath = `inset(0 0 0 ${percent * 100}%)`;
+    const percent = x / rect.width;
+    handle.style.left = `${percent * 100}%`;
+    light.style.clipPath = `inset(0 ${100 - percent * 100}% 0 0)`;
+    dark.style.clipPath = `inset(0 0 0 ${percent * 100}%)`;
+  },
+  { passive: false }
+);
+
+handle.addEventListener("mousedown", () => {
+  slider.classList.add("dragging"); // aura/blikání se vypne
+});
+
+handle.addEventListener("touchstart", () => {
+  slider.classList.add("dragging"); // aura/blikání se vypne
+});
+
+window.addEventListener("mouseup", () => {
+  slider.classList.remove("dragging"); // po uvolnění zůstane vypnutá
+});
+
+window.addEventListener("touchend", () => {
+  slider.classList.remove("dragging"); // po uvolnění zůstane vypnutá
 });
