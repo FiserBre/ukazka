@@ -439,8 +439,9 @@ body.scroll-lock {
 }
 
 .phone-wrapper {
-  width: 220px;
-  height: 800px;
+  width: 50vw; /* šířka 50 % viewportu */
+  max-width: 350px; /* max velikost pro desktop */
+  aspect-ratio: 9/18; /* poměr šířky a výšky telefonu */
   position: relative;
 }
 
@@ -463,13 +464,13 @@ body.scroll-lock {
 
 .screen {
   position: absolute;
-  top: 9px; /* vzdálenost od horního okraje rámce */
-  left: 10px; /* vzdálenost od levého okraje rámce */
-  width: 200px; /* šířka obrazovky telefonu */
-  bottom: 9px; /* výška obrazovky telefonu */
+  top: 1.5%; /* vzdálenost od horního okraje */
+  left: 5%; /* vzdálenost od levého okraje */
+  right: 4%; /* šířka obrazovky telefonu */
+  height: 97%; /* výška obrazovky telefonu */
   overflow: hidden;
   z-index: 10;
-  border-radius: 10px;
+  border-radius: 30px;
 }
 
 .light-mode,
@@ -484,6 +485,7 @@ body.scroll-lock {
 .dark-mode .content {
   padding: 20px;
   font-family: sans-serif;
+  margin-top: 20%;
 }
 
 .light-mode {
@@ -514,8 +516,10 @@ body.scroll-lock {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 24px;
-  height: 80px;
+  width: 6%; /* relativně k šířce telefonu */
+  max-width: 24px;
+  height: 12%; /* relativní výška */
+  max-height: 80px;
   background: linear-gradient(180deg, #ff6ad5, #7f5cff);
   border-radius: 12px;
   cursor: ew-resize;

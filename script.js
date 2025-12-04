@@ -143,9 +143,25 @@ document.addEventListener("mousemove", (e) => {
   if (x > rect.width) x = rect.width;
 
   const percent = x / rect.width;
-  handle.style.left = `${x}px`;
+  handle.style.left = `${percent * 100}%`;
 
-  // horizontální odhalení light/dark
+  light.style.clipPath = `inset(0 ${100 - percent * 100}% 0 0)`;
+  dark.style.clipPath = `inset(0 0 0 ${percent * 100}%)`;
+});
+
+handle.addEventListener("touchstart", () => (isDragging = true));
+document.addEventListener("touchend", () => (isDragging = false));
+document.addEventListener("touchmove", (e) => {
+  if (!isDragging) return;
+
+  const rect = slider.getBoundingClientRect();
+  let x = e.touches[0].clientX - rect.left;
+  if (x < 0) x = 0;
+  if (x > rect.width) x = rect.width;
+
+  const percent = x / rect.width;
+  handle.style.left = `${percent * 100}%`;
+
   light.style.clipPath = `inset(0 ${100 - percent * 100}% 0 0)`;
   dark.style.clipPath = `inset(0 0 0 ${percent * 100}%)`;
 });
