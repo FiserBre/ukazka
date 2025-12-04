@@ -82,25 +82,45 @@ window.addEventListener("DOMContentLoaded", () => {
   }, 2000); // 2s delay než se p element objeví
 });
 
-// Gradient reveal animation
-const effectsSection = document.querySelector(".effects-section");
-const stripes = document.querySelector(".gradient-stripes");
-const effectsText = document.querySelector(".effects-text");
+const section = document.getElementById("effects-section");
+const lines = document.querySelectorAll(".grad-line");
+const text = document.querySelector(".effects-text");
 
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        stripes.classList.add("active");
+let animationTriggered = false;
 
-        // Text zobraz po dokončení vysouvání
-        setTimeout(() => {
-          effectsText.classList.add("visible");
-        }, 1400);
-      }
-    });
-  },
-  { threshold: 0.4 }
-);
+function startAnimation() {
+  if (animationTriggered) return;
+  animationTriggered = true;
 
-observer.observe(effectsSection);
+  document.body.classList.add("scroll-lock");
+
+  // animate stripes
+  lines.forEach((line, i) => {
+    setTimeout(() => {
+      line.style.width = "100%";
+    }, i * 300);
+  });
+
+  // show text at end
+  setTimeout(() => {
+    text.style.opacity = 1;
+  }, lines.length * 300 + 300);
+
+  // unlock scroll when finished
+  setTimeout(() => {
+    document.body.classList.remove("scroll-lock");
+  }, lines.length * 300 + 1500);
+}
+
+function checkSectionPosition() {
+  const rect = section.getBoundingClientRect();
+
+  // SPUSTÍ SE DŘÍV – například ve 35 % okna
+  const triggerPoint = window.innerHeight * 0;
+
+  if (rect.top < triggerPoint && rect.bottom > triggerPoint) {
+    startAnimation();
+  }
+}
+
+window.addEventListener("scroll", checkSectionPosition);
