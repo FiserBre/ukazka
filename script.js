@@ -81,3 +81,26 @@ window.addEventListener("DOMContentLoaded", () => {
     document.getElementById("introSubtitle").classList.add("visible");
   }, 2000); // 2s delay než se p element objeví
 });
+
+// Gradient reveal animation
+const effectsSection = document.querySelector(".effects-section");
+const stripes = document.querySelector(".gradient-stripes");
+const effectsText = document.querySelector(".effects-text");
+
+const observer = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        stripes.classList.add("active");
+
+        // Text zobraz po dokončení vysouvání
+        setTimeout(() => {
+          effectsText.classList.add("visible");
+        }, 1400);
+      }
+    });
+  },
+  { threshold: 0.4 }
+);
+
+observer.observe(effectsSection);
