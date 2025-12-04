@@ -124,3 +124,4 @@ function checkSectionPosition() {
 }
 
 window.addEventListener("scroll", checkSectionPosition);
+
