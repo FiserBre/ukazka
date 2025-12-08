@@ -1,4 +1,4 @@
-// Hamburger toggle
+// ===================== HAMBURGER TOGGLE =====================
 const hamburger = document.querySelector(".hamburger");
 const nav = document.querySelector(".nav");
 hamburger.addEventListener("click", () => {
@@ -6,7 +6,7 @@ hamburger.addEventListener("click", () => {
   nav.classList.toggle("show");
 });
 
-// Reveal animation on scroll
+// ===================== REVEAL ON SCROLL =====================
 const reveals = document.querySelectorAll(".reveal");
 const revealOnScroll = () => {
   reveals.forEach((el) => {
@@ -15,9 +15,9 @@ const revealOnScroll = () => {
   });
 };
 window.addEventListener("scroll", revealOnScroll);
-window.onload = revealOnScroll;
+window.addEventListener("load", revealOnScroll);
 
-// Theme toggle
+// ===================== THEME TOGGLE =====================
 const themeBtn = document.getElementById("themeToggle");
 const themeIcon = document.getElementById("themeIcon");
 if (localStorage.getItem("theme") === "dark")
@@ -42,15 +42,15 @@ function updateTheme() {
     .forEach((span) => (span.style.background = isDark ? "#fff" : "#111"));
 }
 
-// ROTUJÍCÍ TEXT
+// ===================== ROTATING TEXT =====================
 const words = ["weby", "aplikace", "SQL databáze", "e-shopy", "fotografie"];
-let currentWord = 0;
-let currentChar = 0;
-let isDeleting = false;
+let currentWord = 0,
+  currentChar = 0,
+  isDeleting = false;
 const element = document.getElementById("rotatingText");
-const typingSpeed = 100;
-const deletingSpeed = 50;
-const delayBetweenWords = 1500;
+const typingSpeed = 100,
+  deletingSpeed = 50,
+  delayBetweenWords = 1500;
 
 function type() {
   const word = words[currentWord];
@@ -72,16 +72,17 @@ function type() {
   }
   setTimeout(type, isDeleting ? deletingSpeed : typingSpeed);
 }
-
 type();
 
-// FADE-IN P ELEMENT PO CHVÍLI
+// ===================== FADE-IN INTRO SUBTITLE =====================
 window.addEventListener("DOMContentLoaded", () => {
   setTimeout(() => {
-    document.getElementById("introSubtitle").classList.add("visible");
-  }, 2000); // 2s delay než se p element objeví
+    const subtitle = document.getElementById("introSubtitle");
+    if (subtitle) subtitle.classList.add("visible");
+  }, 2000);
 });
 
+// ===================== EFFECTS SECTION =====================
 const section = document.getElementById("effects-section");
 const lines = document.querySelectorAll(".grad-line");
 const text = document.querySelector(".effects-text");
@@ -89,25 +90,20 @@ const text = document.querySelector(".effects-text");
 let animationTriggered = false;
 let scrollLocked = false;
 
-// funkce pro blokování scrollu
 function lockScroll() {
   scrollLocked = true;
   document.body.style.overflow = "hidden";
   document.documentElement.style.overflow = "hidden";
 }
-
-// funkce pro odblokování scrollu
 function unlockScroll() {
   scrollLocked = false;
   document.body.style.overflow = "";
   document.documentElement.style.overflow = "";
 }
 
-// animace
 function startAnimation() {
   if (animationTriggered) return;
   animationTriggered = true;
-
   lockScroll();
 
   lines.forEach((line, i) => {
@@ -116,28 +112,16 @@ function startAnimation() {
     }, i * 300);
   });
 
-  setTimeout(() => {
-    text.style.opacity = 1;
-  }, lines.length * 300 + 300);
-
-  setTimeout(() => {
-    unlockScroll();
-  }, lines.length * 300 + 1500);
+  setTimeout(() => (text.style.opacity = 1), lines.length * 300 + 300);
+  setTimeout(unlockScroll, lines.length * 300 + 1500);
 }
 
-// kontrola pozice sekce
 function checkSectionPosition() {
   if (animationTriggered) return;
-
   const rect = section.getBoundingClientRect();
-  const triggerPoint = window.innerHeight * 0;
-
-  if (rect.top <= triggerPoint) {
-    startAnimation();
-  }
+  if (rect.top <= window.innerHeight * 0) startAnimation();
 }
 
-// zachycení scrollu při locku
 function preventScroll(e) {
   if (scrollLocked) {
     e.preventDefault();
@@ -155,56 +139,67 @@ window.addEventListener(
     if (
       scrollLocked &&
       ["ArrowUp", "ArrowDown", "PageUp", "PageDown", "Space"].includes(e.code)
-    ) {
+    )
       e.preventDefault();
-    }
   },
   { passive: false }
 );
-
 window.addEventListener("load", checkSectionPosition);
 
+// ===================== HORIZONTAL SLIDER (DESKTOP + MOBILE) =====================
 const slider = document.querySelector(".horizontal-slider");
-const handle = document.querySelector(".horizontal-slider .handle");
+const handle = slider.querySelector(".handle");
 const light = document.querySelector(".light-mode");
 const dark = document.querySelector(".dark-mode");
 
 let isDragging = false;
 
-handle.addEventListener("mousedown", () => (isDragging = true));
-document.addEventListener("mouseup", () => (isDragging = false));
+// --------- HELPER FUNCTION ---------
+function updateSlider(x) {
+  const rect = slider.getBoundingClientRect();
+  let posX = x - rect.left;
+  if (posX < 0) posX = 0;
+  if (posX > rect.width) posX = rect.width;
+
+  const percent = posX / rect.width;
+  handle.style.left = `${percent * 100}%`;
+  light.style.clipPath = `inset(0 ${100 - percent * 100}% 0 0)`;
+  dark.style.clipPath = `inset(0 0 0 ${percent * 100}%)`;
+}
+
+// --------- DESKTOP EVENTS ---------
+handle.addEventListener("mousedown", () => {
+  isDragging = true;
+  slider.classList.add("dragging");
+});
+document.addEventListener("mouseup", () => {
+  isDragging = false;
+  slider.classList.remove("dragging");
+});
 document.addEventListener("mousemove", (e) => {
-  if (!isDragging) return;
-
-  const rect = slider.getBoundingClientRect();
-  let x = e.clientX - rect.left;
-  if (x < 0) x = 0;
-  if (x > rect.width) x = rect.width;
-
-  const percent = x / rect.width;
-  handle.style.left = `${percent * 100}%`;
-
-  light.style.clipPath = `inset(0 ${100 - percent * 100}% 0 0)`;
-  dark.style.clipPath = `inset(0 0 0 ${percent * 100}%)`;
+  if (isDragging) updateSlider(e.clientX);
 });
 
-handle.addEventListener("touchstart", () => (isDragging = true));
-document.addEventListener("touchend", () => (isDragging = false));
-document.addEventListener("touchmove", (e) => {
-  if (!isDragging) return;
-
-  const rect = slider.getBoundingClientRect();
-  let x = e.touches[0].clientX - rect.left;
-  if (x < 0) x = 0;
-  if (x > rect.width) x = rect.width;
-
-  const percent = x / rect.width;
-  handle.style.left = `${percent * 100}%`;
-
-  light.style.clipPath = `inset(0 ${100 - percent * 100}% 0 0)`;
-  dark.style.clipPath = `inset(0 0 0 ${percent * 100}%)`;
+// --------- TOUCH EVENTS ---------
+handle.addEventListener("touchstart", () => {
+  isDragging = true;
+  slider.classList.add("dragging");
 });
+document.addEventListener("touchend", () => {
+  isDragging = false;
+  slider.classList.remove("dragging");
+});
+document.addEventListener(
+  "touchmove",
+  (e) => {
+    if (!isDragging) return;
+    updateSlider(e.touches[0].clientX);
+    e.preventDefault(); // zabraňuje scrollu
+  },
+  { passive: false }
+);
 
+// ===================== GENERATE PRODUCTS =====================
 function generateStars() {
   let count = Math.floor(Math.random() * 5) + 1;
   return "★".repeat(count) + "☆".repeat(5 - count);
@@ -227,9 +222,6 @@ function generateProduct(i) {
 
 document.querySelectorAll(".product-track").forEach((track, idx) => {
   let html = "";
-  for (let i = 1; i <= 10; i++) {
-    html += generateProduct(idx * 10 + i);
-  }
-
+  for (let i = 1; i <= 10; i++) html += generateProduct(idx * 10 + i);
   track.innerHTML = html;
 });
