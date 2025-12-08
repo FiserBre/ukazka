@@ -232,8 +232,4 @@ document.querySelectorAll(".product-track").forEach((track, idx) => {
   }
 
   track.innerHTML = html;
-
-  // duplikace pro nekonečný efekt
-  const clone = track.cloneNode(true);
-  track.parentElement.appendChild(clone);
 });
