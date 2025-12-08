@@ -200,16 +200,27 @@ document.addEventListener(
 );
 
 // ===================== GENERATE PRODUCTS =====================
+const products = [
+  { name: "Iphone 15 Pro", img: "iphone-15-pro-max.jpg" },
+  { name: "Adidas Ultraboost", img: "Adidas.jpg" },
+  { name: "Apple Watch", img: "AppleWatch.jpg" },
+  { name: "Gaming Mouse", img: "mouse.jpg" },
+  { name: "Perfume Dior", img: "dior.jpg" },
+  { name: "Keyboard RGB", img: "hyperx.jpg" },
+  { name: "JBL Headphones", img: "jbl.jpg" },
+  { name: "Backpack Urban", img: "peak.jpg" },
+];
+
 function generateStars() {
   let count = Math.floor(Math.random() * 5) + 1;
   return "★".repeat(count) + "☆".repeat(5 - count);
 }
 
-function generateProduct(i) {
+function generateProduct(product) {
   return `
     <div class="product-card">
-      <img src="https://picsum.photos/200/200?random=${i}" class="product-img">
-      <div class="product-title">Produkt #${i}</div>
+      <img src="${product.img}" class="product-img" alt="${product.name}">
+      <div class="product-title">${product.name}</div>
       <div class="stars">
         ${generateStars()
           .split("")
@@ -220,8 +231,14 @@ function generateProduct(i) {
   `;
 }
 
-document.querySelectorAll(".product-track").forEach((track, idx) => {
+document.querySelectorAll(".product-track").forEach((track) => {
   let html = "";
-  for (let i = 1; i <= 10; i++) html += generateProduct(idx * 10 + i);
+  products.forEach((product) => {
+    html += generateProduct(product);
+  });
+
   track.innerHTML = html;
+
+  // duplikace pro nekonečný efekt
+  const clone = track.cloneNode(true);
 });
