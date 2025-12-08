@@ -130,7 +130,7 @@ function checkSectionPosition() {
   if (animationTriggered) return;
 
   const rect = section.getBoundingClientRect();
-  const triggerPoint = window.innerHeight * 0.1;
+  const triggerPoint = window.innerHeight * 0;
 
   if (rect.top <= triggerPoint) {
     startAnimation();
@@ -147,6 +147,20 @@ function preventScroll(e) {
 }
 
 window.addEventListener("scroll", checkSectionPosition);
+window.addEventListener("wheel", preventScroll, { passive: false });
+window.addEventListener("touchmove", preventScroll, { passive: false });
+window.addEventListener(
+  "keydown",
+  (e) => {
+    if (
+      scrollLocked &&
+      ["ArrowUp", "ArrowDown", "PageUp", "PageDown", "Space"].includes(e.code)
+    ) {
+      e.preventDefault();
+    }
+  },
+  { passive: false }
+);
 
 window.addEventListener("load", checkSectionPosition);
 
@@ -157,42 +171,38 @@ const dark = document.querySelector(".dark-mode");
 
 let isDragging = false;
 
-// --- Myš ---
 handle.addEventListener("mousedown", () => (isDragging = true));
 document.addEventListener("mouseup", () => (isDragging = false));
 document.addEventListener("mousemove", (e) => {
   if (!isDragging) return;
 
-  e.preventDefault();
-
   const rect = slider.getBoundingClientRect();
   let x = e.clientX - rect.left;
-  x = Math.max(0, Math.min(x, rect.width));
+  if (x < 0) x = 0;
+  if (x > rect.width) x = rect.width;
 
   const percent = x / rect.width;
   handle.style.left = `${percent * 100}%`;
+
   light.style.clipPath = `inset(0 ${100 - percent * 100}% 0 0)`;
   dark.style.clipPath = `inset(0 0 0 ${percent * 100}%)`;
 });
 
-// --- Dotyk ---
 handle.addEventListener("touchstart", () => (isDragging = true));
 document.addEventListener("touchend", () => (isDragging = false));
+document.addEventListener("touchmove", (e) => {
+  if (!isDragging) return;
 
-handle.addEventListener("mousedown", () => {
-  slider.classList.add("dragging"); // aura/blikání se vypne
-});
+  const rect = slider.getBoundingClientRect();
+  let x = e.touches[0].clientX - rect.left;
+  if (x < 0) x = 0;
+  if (x > rect.width) x = rect.width;
 
-handle.addEventListener("touchstart", () => {
-  slider.classList.add("dragging"); // aura/blikání se vypne
-});
+  const percent = x / rect.width;
+  handle.style.left = `${percent * 100}%`;
 
-window.addEventListener("mouseup", () => {
-  slider.classList.remove("dragging"); // po uvolnění zůstane vypnutá
-});
-
-window.addEventListener("touchend", () => {
-  slider.classList.remove("dragging");
+  light.style.clipPath = `inset(0 ${100 - percent * 100}% 0 0)`;
+  dark.style.clipPath = `inset(0 0 0 ${percent * 100}%)`;
 });
 
 function generateStars() {
@@ -222,4 +232,8 @@ document.querySelectorAll(".product-track").forEach((track, idx) => {
   }
 
   track.innerHTML = html;
+
+  // duplikace pro nekonečný efekt
+  const clone = track.cloneNode(true);
+  track.parentElement.appendChild(clone);
 });
