@@ -130,7 +130,7 @@ function checkSectionPosition() {
   if (animationTriggered) return;
 
   const rect = section.getBoundingClientRect();
-  const triggerPoint = window.innerHeight * 0;
+  const triggerPoint = window.innerHeight * 0.1;
 
   if (rect.top <= triggerPoint) {
     startAnimation();
@@ -147,20 +147,6 @@ function preventScroll(e) {
 }
 
 window.addEventListener("scroll", checkSectionPosition);
-window.addEventListener("wheel", preventScroll, { passive: false });
-window.addEventListener("touchmove", preventScroll, { passive: false });
-window.addEventListener(
-  "keydown",
-  (e) => {
-    if (
-      scrollLocked &&
-      ["ArrowUp", "ArrowDown", "PageUp", "PageDown", "Space"].includes(e.code)
-    ) {
-      e.preventDefault();
-    }
-  },
-  { passive: false }
-);
 
 window.addEventListener("load", checkSectionPosition);
 
@@ -193,25 +179,6 @@ document.addEventListener("mousemove", (e) => {
 handle.addEventListener("touchstart", () => (isDragging = true));
 document.addEventListener("touchend", () => (isDragging = false));
 
-// Pozor: { passive: false } umožní preventDefault blokovat scroll
-document.addEventListener(
-  "touchmove",
-  (e) => {
-    if (!isDragging) return;
-    e.preventDefault();
-
-    const rect = slider.getBoundingClientRect();
-    let x = e.touches[0].clientX - rect.left;
-    x = Math.max(0, Math.min(x, rect.width));
-
-    const percent = x / rect.width;
-    handle.style.left = `${percent * 100}%`;
-    light.style.clipPath = `inset(0 ${100 - percent * 100}% 0 0)`;
-    dark.style.clipPath = `inset(0 0 0 ${percent * 100}%)`;
-  },
-  { passive: false }
-);
-
 handle.addEventListener("mousedown", () => {
   slider.classList.add("dragging"); // aura/blikání se vypne
 });
@@ -225,5 +192,34 @@ window.addEventListener("mouseup", () => {
 });
 
 window.addEventListener("touchend", () => {
-  slider.classList.remove("dragging"); // po uvolnění zůstane vypnutá
+  slider.classList.remove("dragging");
+});
+
+function generateStars() {
+  let count = Math.floor(Math.random() * 5) + 1;
+  return "★".repeat(count) + "☆".repeat(5 - count);
+}
+
+function generateProduct(i) {
+  return `
+    <div class="product-card">
+      <img src="https://picsum.photos/200/200?random=${i}" class="product-img">
+      <div class="product-title">Produkt #${i}</div>
+      <div class="stars">
+        ${generateStars()
+          .split("")
+          .map((s) => `<span>${s}</span>`)
+          .join("")}
+      </div>
+    </div>
+  `;
+}
+
+document.querySelectorAll(".product-track").forEach((track, idx) => {
+  let html = "";
+  for (let i = 1; i <= 10; i++) {
+    html += generateProduct(idx * 10 + i);
+  }
+
+  track.innerHTML = html;
 });
